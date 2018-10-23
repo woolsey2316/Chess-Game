@@ -1,0 +1,7 @@
+{
+    "COLOUR": "WHITE",
+    "numberOfDefeats": 0,
+    "numberOfDraws": 0,
+    "numberOfWins": 0,
+    "rating": 856
+}

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="chess-game" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/chess-game" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add directory="C:/Libs/c++/sfml/include" />
+					<Add directory="C:/Libs/c++/boost_1_68_0" />
+					<Add directory="include" />
+					<Add directory="C:/Libs/c++" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="images" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="sfml-graphics" />
+					<Add library="sfml-window" />
+					<Add library="sfml-system" />
+					<Add directory="C:/Libs/c++/sfml/lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/chess-game" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+					<Add directory="C:/Libs/c++" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-window" />
+					<Add library="sfml-system" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="C:/CodeBlocks/sfml/include" />
+			<Add directory="C:/Libs/c++" />
+		</Compiler>
+		<Linker>
+			<Add library="sfml-graphics" />
+			<Add library="sfml-window" />
+			<Add library="sfml-system" />
+			<Add directory="C:/CodeBlocks/sfml/lib" />
+			<Add directory="libs" />
+		</Linker>
+		<Unit filename="data/match.txt" />
+		<Unit filename="include/AnalysisScreen.h" />
+		<Unit filename="include/Bishop.h" />
+		<Unit filename="include/CheckMateScreen.h" />
+		<Unit filename="include/CheckStatus.h" />
+		<Unit filename="include/ChessBoard.h" />
+		<Unit filename="include/ChessGame.h" />
+		<Unit filename="include/ChessPiece.h" />
+		<Unit filename="include/Computer.h" />
+		<Unit filename="include/Connector.h" />
+		<Unit filename="include/Coordinates.h" />
+		<Unit filename="include/DrillScreen.h" />
+		<Unit filename="include/GameScreen.h" />
+		<Unit filename="include/King.h" />
+		<Unit filename="include/Knight.h" />
+		<Unit filename="include/MainScreen.h" />
+		<Unit filename="include/Matrix.h" />
+		<Unit filename="include/MoveType.h" />
+		<Unit filename="include/Pawn.h" />
+		<Unit filename="include/Player.h" />
+		<Unit filename="include/PromotionScreen.h" />
+		<Unit filename="include/Queen.h" />
+		<Unit filename="include/Rook.h" />
+		<Unit filename="include/Screens.h" />
+		<Unit filename="include/SettingsScreen.h" />
+		<Unit filename="include/Square.h" />
+		<Unit filename="include/cScreen.h" />
+		<Unit filename="include/global.h" />
+		<Unit filename="src/AnalysisScreen.cpp" />
+		<Unit filename="src/Bishop.cpp" />
+		<Unit filename="src/CheckMateScreen.cpp" />
+		<Unit filename="src/CheckStatus.cpp" />
+		<Unit filename="src/ChessBoard.cpp" />
+		<Unit filename="src/ChessGame.cpp" />
+		<Unit filename="src/ChessPiece.cpp" />
+		<Unit filename="src/Computer.cpp" />
+		<Unit filename="src/Connector.cpp" />
+		<Unit filename="src/Coordinates.cpp" />
+		<Unit filename="src/DrillScreen.cpp" />
+		<Unit filename="src/GameScreen.cpp" />
+		<Unit filename="src/King.cpp" />
+		<Unit filename="src/Knight.cpp" />
+		<Unit filename="src/MainScreen.cpp" />
+		<Unit filename="src/MoveType.cpp" />
+		<Unit filename="src/Pawn.cpp" />
+		<Unit filename="src/Player.cpp" />
+		<Unit filename="src/PromotionScreen.cpp" />
+		<Unit filename="src/Queen.cpp" />
+		<Unit filename="src/Rook.cpp" />
+		<Unit filename="src/Screens.cpp" />
+		<Unit filename="src/SettingsScreen.cpp" />
+		<Unit filename="src/Square.cpp" />
+		<Unit filename="src/cScreen.cpp" />
+		<Unit filename="src/global.cpp" />
+		<Unit filename="src/main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
