@@ -21,81 +21,79 @@
 
 typedef std::shared_ptr<ChessPiece> ChessPiecePtr;
 
-bool validPawnCapture(int x_pos, int y_pos, int x_dest, int y_dest, std::string COLOUR);
-//default constructor initialises pieces in starting position
-ChessBoard::ChessBoard()
-{
-  reset();
-}
-
 MoveType ChessBoard::playerMove(std::string playerTurn, int x_pos, int y_pos, int x_dest, int y_dest)
 {
   moveType = MoveType::Invalid;
   if (!validGridCoords(x_pos, y_pos, x_dest, y_dest)) {
     return moveType;
   }
-  //user didn't select a piece to move was an empty square
+  //user didn't select a piece to move, it was an empty square
   if (!board[x_pos][y_pos].isOccupied()){
     return moveType;
   }
-  //didn't even move
+  //the piece didn't even move
   if (x_pos == x_dest && y_pos == y_dest) {
     return moveType;
   }
-  //checks if it is the player's turn
+  //checks if it is the player's turn or alternatively moved your own piece
   if (board[x_pos][y_pos].getChessPiece()->getColour() != playerTurn){
     return moveType;
   }
+  //update configuration of board, if move is invalid unwind the move later
+  chesspieceTouched = board[x_pos][y_pos].getChessPiece();
+  capturedChesspiece = board[x_dest][y_dest].getChessPiece();
+  board[x_dest][y_dest].setChessPiece(chesspieceTouched);
+
   std::string chessPieceType = board[x_pos][y_pos].getChessPiece()->getType();
   if (chessPieceType == "KING") {
     kingIndex[0] = x_dest; kingIndex[1] = y_dest;
   }
   std::string COLOUR = board[x_pos][y_pos].getChessPiece()->getColour();
-  determineCheckStatus(playerTurn, false);
+  bool opponentKing = false;
+  //determine if your own king is in check
+  determineCheckStatus(playerTurn, opponentKing);
 
-  if (checkStatus == CheckStatus::Check) {
-    if (!doesMoveResolveCheck(x_pos, y_pos, x_dest, y_dest)) {
-      return moveType;
+  //A move that involves a capture or castling
+  if (board[x_dest][y_dest].isOccupied()) {
+    //check if piece captures the other colour
+    moveType = captureChessPiece(x_pos, y_pos, x_dest, y_dest);
+    if (moveType == MoveType::Invalid) {
+      if (board[x_pos][y_pos].getChessPiece()->isValidCapture(
+            x_pos, y_pos, x_dest, y_dest, COLOUR)) {
+          moveType = captureChessPiece(x_pos, y_pos, x_dest, y_dest);
+      }
+    }
+  } else if (kingAttemptingCastle(x_pos, y_pos, x_dest, y_dest)) {
+    moveType = (castle(x_pos, y_pos, x_dest, y_dest));
+  } else if (chessPieceType == "PAWN") {
+    moveType = enPassant(x_pos, y_pos, x_dest, y_dest);
+  }
+  if (moveType == MoveType::Invalid) {
+    moveType = moveToEmptySquare(x_pos, y_pos, x_dest, y_dest);
+  }
+  if (moveType != MoveType::Invalid) {
+    board[x_dest][y_dest].getChessPiece()->setHasMoved(true);
+    board[x_dest][y_dest].getChessPiece()->incrementTotalMoves();
+    mostRecentMove[0] = x_dest;
+    mostRecentMove[1] = y_dest;
+
+    if (chessPieceType == "PAWN" && board[x_dest][y_dest].canPromotePawn()) {
+      moveType = promotePawn(x_pos, y_pos, x_dest, y_dest);
+      enPassantCapture = (x_dest - x_pos == 2) ? true : false;
+    }
+    enPassantCapture = false;
+
+    opponentKing = true;
+    if (determineCheckStatus(playerTurn, opponentKing) == CheckStatus::CheckMate) {
+      return MoveType::CheckMate;
+      std::cout << "Check Mate" << playerTurn << "Wins!" << std::endl;
+    }
+    if (checkStatus == CheckStatus::NotInCheck) {
+      testForStalemate(playerTurn);
     }
   }
-    //A move that involves a capture or castling
-    if (board[x_dest][y_dest].isOccupied()) {
-      //check if piece captures the other colour
-      moveType = captureChessPiece(x_pos, y_pos, x_dest, y_dest);
-      if (moveType == MoveType::Invalid) {
-        //Pawn has its own capture method
-        if (board[x_pos][y_pos].getChessPiece()->isValidCapture(
-              x_pos, y_pos, x_dest, y_dest, COLOUR)) {
-            moveType = captureChessPiece(x_pos, y_pos, x_dest, y_dest);
-        }
-      }
-    } else if (kingAttemptingCastle(x_pos, y_pos, x_dest, y_dest)) {
-        moveType = (castle(x_pos, y_pos, x_dest, y_dest));
-    } else if (chessPieceType == "PAWN") {
-        moveType = enPassant(x_pos, y_pos, x_dest, y_dest);
-    }
-    if (moveType == MoveType::Invalid) {
-      moveType = moveToEmptySquare(x_pos, y_pos, x_dest, y_dest);
-    }
-    if (moveType != MoveType::Invalid) {
-      board[x_dest][y_dest].getChessPiece()->setHasMoved(true);
-      board[x_dest][y_dest].getChessPiece()->incrementTotalMoves();
-      mostRecentMove[0] = x_dest;
-      mostRecentMove[1] = y_dest;
-
-      if (chessPieceType == "PAWN" && board[x_dest][y_dest].canPromotePawn()) {
-        moveType = promotePawn(x_pos, y_pos, x_dest, y_dest);
-      }
-      bool opponentKing = true;
-      if (determineCheckStatus(playerTurn, opponentKing) == CheckStatus::CheckMate) {
-        return MoveType::CheckMate;
-        std::cout << "Check Mate" << playerTurn << "Wins!" << std::endl;
-      }
-      if (checkStatus == CheckStatus::NotInCheck) {
-        testForStalemate(playerTurn);
-      }
-    }
-    return moveType;
+  reverseMove(x_pos, y_pos, x_dest, y_dest);
+  return moveType;
 }
 
 bool ChessBoard::doesMoveResolveCheck(int x_pos, int y_pos, int x_dest, int y_dest)
@@ -236,8 +234,6 @@ MoveType ChessBoard::castle(int x_pos, int y_pos, int x_dest, int y_dest)
   //the piece moved validly according its own move rules
   std::string COLOUR = board[x_pos][y_pos].getChessPiece()->getColour();
   if (isLegalCastle(x_pos, y_pos, x_dest, y_dest, COLOUR)) {
-      //update king location here
-      board[x_dest][y_dest].setChessPiece(board[x_pos][y_pos]);
       //kingside castle update rook position
       if (y_dest==6){
         board[x_pos][5].setChessPiece(board[x_pos][7]);
@@ -269,14 +265,9 @@ bool ChessBoard::isLegalCastle(int x_pos,int y_pos,int x_dest,int y_dest,std::st
     return false;
 
   //checks if any square the king passes through is vulnerable to attack
-  for (int i=0;i<2;++i) {
-    y_pos+=moveRightorLeft;
+  for (int i = 0; i < 2; ++i) {
+    y_pos += moveRightorLeft;
     if (isDefended(x_pos, y_pos, COLOUR))
-      return false;
-  }
-  //castling by queenside requires checking 1 more square
-  if (queenSide){
-    if (board[x_pos][y_pos-1].isOccupied())
       return false;
   }
   return true;
@@ -410,15 +401,15 @@ bool ChessBoard::canBlockorCaptureThreat(int x_pos, int y_pos, int x_dest, int y
       }
       if (kingIndex[0] - checkThreat_x == 0) {
         return (x_dest == kingIndex[0])
-            && (((kingIndex[1] - y_dest < 0)
+            && (((kingIndex[1] < y_dest )
             && (checkThreat_y >= y_dest))
-            || ((kingIndex[1] - y_dest > 0)
+            || ((kingIndex[1] > y_dest )
             && (checkThreat_y <= y_dest)));
       } else if (kingIndex[1] - checkThreat_y == 0) {
         return (y_dest == kingIndex[1])
-           && (((kingIndex[0] - x_dest < 0)
+           && (((kingIndex[0] < x_dest )
            && (checkThreat_x >= x_dest))
-           || ((kingIndex[0] - x_dest > 0)
+           || ((kingIndex[0] > x_dest )
            && (checkThreat_x <= x_dest)));
       } else if (abs(kingIndex[1] - checkThreat_y) == abs(kingIndex[0] - checkThreat_x)){
         return !(((x_dest > kingIndex[0]) && (x_dest > checkThreat_x))
@@ -444,7 +435,7 @@ bool ChessBoard::canBlockThreat(int x_pos, int y_pos)
   std::vector<std::array<int, 2>> possibleMoves = board[x_pos][y_pos].getChessPiece()->possibleMoves(x_pos, y_pos);
   for (const auto & dest : possibleMoves) {
       x_dest = dest[0]; y_dest = dest[1];
-    //3 cases diagonal threat, horizontal threat, vertical threat
+    //3 cases horizontal threat, vertical threat, and diagonal threat
     if (!isPathBlocked(x_pos, y_pos, x_dest, y_dest)) {
       if (!board[x_pos][y_pos].getChessPiece()->isValidMove(
                 x_pos, y_pos, x_dest, y_dest)) {
@@ -476,12 +467,17 @@ bool ChessBoard::canBlockThreat(int x_pos, int y_pos)
       }
     }
   }
+  //can never block a knight that's checking a king
   return false;
 }
 
 bool ChessBoard::canCaptureThreat(int x_pos, int y_pos) {
   if (board[x_pos][y_pos].getChessPiece()->getType() != "KING") {
     std::string COLOUR = board[checkThreat_x][checkThreat_y].getChessPiece()->getColour();
+    std::string PIECE_TYPE = board[checkThreat_x][checkThreat_y].getChessPiece()->getColour();
+
+    board[x_pos][y_pos].getChessPiece()->isValidEnPassant(
+        x_pos, y_pos, checkThreat_x, checkThreat_y, PIECE_TYPE, mostRecentMove);
     return (board[x_pos][y_pos].getChessPiece()->isValidCapture(
         x_pos, y_pos, checkThreat_x, checkThreat_y, COLOUR));
   }
@@ -580,46 +576,6 @@ bool ChessBoard::isMoveLegal(int x_pos,int y_pos,int x_dest,int y_dest)
   return false;
 }
 
-void ChessBoard::setPromotingColour(std::string COLOUR)
-{
-  promotingColour = COLOUR;
-}
-
-void ChessBoard::setPromotingPiece(std::string type)
-{
-  promotingPiece = type;
-}
-
-std::string ChessBoard::getPromotingColour()
-{
-  return promotingColour;
-}
-
-std::string ChessBoard::getPromotingPiece()
-{
-  return promotingPiece;
-}
-
-ChessPiecePtr ChessBoard::getChessPiece(int x, int y)
-{
-  return board[x][y].getChessPiece();
-}
-
-std::string ChessBoard::getType(int x, int y)
-{
-  return board[x][y].getChessPiece()->getType();
-}
-
-std::string ChessBoard::getColour(int x, int y)
-{
-  return board[x][y].getChessPiece()->getColour();
-}
-
-bool ChessBoard::isOccupied(int x_pos, int y_pos)
-{
-  return board[x_pos][y_pos].isOccupied();
-}
-
 bool ChessBoard::validGridCoords(int x_pos, int y_pos, int x_dest, int y_dest)
 {
   return (x_pos >= 0 && x_pos < 8 && y_pos >= 0 && y_pos < 8) &&
@@ -698,33 +654,91 @@ void ChessBoard::testForStalemate(std::string PLAYER_TURN)
   std::string OPPONENT_COLOUR = (PLAYER_TURN == "WHITE" ? "BLACK" : "WHITE");
   findKing(OPPONENT_COLOUR);
   int legalMoves = 0;
-  int matingPieces = 0;
-  int pieces = 0;
+  int numChessPieces = 0;
+  int neccesaryMatingPieces = 0;
+  int numKnights;
   for (int x_pos = 0; x_pos < 8; ++x_pos) {
     for (int y_pos = 0; y_pos < 8; ++y_pos) {
       if (board[x_pos][y_pos].isOccupied()) {
         if (board[x_pos][y_pos].getChessPiece()->matingPiece()) {
-          matingPieces++;
+          neccesaryMatingPieces++;
         }
-        pieces++;
+        if (board[x_pos][y_pos].getChessPiece()->getType() == "KNIGHT") {
+          numKights++;
+        }
+        numChessPieces++;
+
         if (board[x_pos][y_pos].getChessPiece()->getColour() == OPPONENT_COLOUR) {
-        std::vector<std::array<int, 2>> possibleMoves = board[x_pos][y_pos].getChessPiece()->possibleMoves(x_pos, y_pos);
-        for (const auto & elem : possibleMoves) {
-          if (isMoveLegal(x_pos, y_pos, elem[0], elem[1])) {
-            legalMoves++;
+          std::vector<std::array<int, 2>> possibleMoves = board[x_pos][y_pos]
+              .getChessPiece()->possibleMoves(x_pos, y_pos);
+          if (!possibleMoves.empty())  {
+            for (const auto & elem : possibleMoves) {
+              if (isMoveLegal(x_pos, y_pos, elem[0], elem[1])) {
+                legalMoves++;
+              }
+            }
           }
-        }
         }
       }
     }
   }
   if (legalMoves == 0) {
     moveType = MoveType::StaleMate;
-  } else if (pieces == 2) {
-    moveType = MoveType::Draw;
-  } else if (pieces == 3) {
-      if (matingPieces == 0) {
-        moveType = MoveType::Draw;
-      }
+  } else if (neccesaryMatingPieces == 0) {
+    if (numChessPieces == 3 && numKnights == 1) {
+      moveType = MoveType::Draw;
+    }
   }
 }
+
+ChessBoard::ChessBoard()
+{
+  reset();
+}
+
+void ChessBoard::reverseMove(int x_pos, int y_pos, int x_dest, int y_dest)
+{
+  board[x_pos][y_pos].setChessPiece(chesspieceTouched);
+  board[x_dest][y_dest].setChessPiece(capturedChesspiece);
+}
+
+void ChessBoard::setPromotingColour(std::string COLOUR)
+{
+  promotingColour = COLOUR;
+}
+
+void ChessBoard::setPromotingPiece(std::string type)
+{
+  promotingPiece = type;
+}
+
+std::string ChessBoard::getPromotingColour()
+{
+  return promotingColour;
+}
+
+std::string ChessBoard::getPromotingPiece()
+{
+  return promotingPiece;
+}
+
+ChessPiecePtr ChessBoard::getChessPiece(int x, int y)
+{
+  return board[x][y].getChessPiece();
+}
+
+std::string ChessBoard::getType(int x, int y)
+{
+  return board[x][y].getChessPiece()->getType();
+}
+
+std::string ChessBoard::getColour(int x, int y)
+{
+  return board[x][y].getChessPiece()->getColour();
+}
+
+bool ChessBoard::isOccupied(int x_pos, int y_pos)
+{
+  return board[x_pos][y_pos].isOccupied();
+}
+

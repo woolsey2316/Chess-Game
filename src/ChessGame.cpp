@@ -97,10 +97,11 @@ void ChessGame::reverseMove()
 {
   moveList.pop_back();
   if (entireMoveHistory.length() > 12) {
-    entireMoveHistory.erase(entireMoveHistory.length()-12,5);
+    entireMoveHistory.erase(entireMoveHistory.length()-5,5);
   } else {
     entireMoveHistory = "";
   }
+  std::cout << std::endl << (entireMoveHistory);
 }
 
 Computer& ChessGame::getComputer()

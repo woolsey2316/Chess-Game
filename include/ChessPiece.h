@@ -30,6 +30,7 @@ class ChessPiece {
 	void setHasMoved(bool moved);
 	void incrementTotalMoves();
 	bool matingPiece();
+	bool knightOrBishop();
 
 };
 

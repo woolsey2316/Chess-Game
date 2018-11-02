@@ -12,9 +12,9 @@ class Square
 {
   private:
   ChessPiecePtr chesspiece;
-  bool vulnerableSquare;
   bool SQUARE_PROMOTING_PAWN;
   bool darkSquare;
+  std::string COLOUR;
 
   public:
   Square();
@@ -26,6 +26,7 @@ class Square
   void setChessPiece(Square& piece);
   void setChessPiece(ChessPiecePtr ptr);
   bool promotePawn(std::string ChessPieceType, std::string COLOUR);
+  std::string getColour();
 
 };
 

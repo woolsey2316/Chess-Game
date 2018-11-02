@@ -43,3 +43,8 @@ bool ChessPiece::matingPiece()
 {
   return (type == "ROOK") || (type == "QUEEN") || (type == "PAWN");
 }
+
+bool ChessPiece::knightOrBishop()
+{
+  return (type == "KNIGHT") || (type == "BISHOP");
+}

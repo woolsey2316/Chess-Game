@@ -17,6 +17,7 @@ class ChessBoard {
   int possibleMoves[8][8];
   Square board[8][8];
   int mostRecentMove[2];
+  bool enPassantCapture;
   std::string promotingColour;
   std::string promotingPiece;
   int checkThreat_x, checkThreat_y;
@@ -26,6 +27,8 @@ class ChessBoard {
 
  public:
   ChessBoard();
+  ChessPiecePtr chesspieceTouched;
+  ChessPiecePtr capturedChesspiece;
   void reset();
   //determines the type of move (capture, move to empty square, checkmate, etc.) ,
   MoveType playerMove(std::string turn, int x, int y, int x_dest, int y_dest);
@@ -75,6 +78,10 @@ class ChessBoard {
   std::string getColour(int x, int y);
   bool isOccupied(int x_pos, int y_pos);
   void testForStalemate(std::string PLAYER_TURN);
+  //was the most recent move a two step enPassant
+  void setEnPassant(bool pawnMoves2Squares);
+  //unwinds invalid move
+  void reverseMove(int x_pos,int y_pos,int x_dest,int y_dest);
 };
 
 #endif

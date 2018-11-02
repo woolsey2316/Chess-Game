@@ -74,3 +74,8 @@ bool Square::canPromotePawn()
 {
   return SQUARE_PROMOTING_PAWN;
 }
+
+String getColour()
+{
+  return COLOUR;
+}
