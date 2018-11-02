@@ -664,7 +664,7 @@ void ChessBoard::testForStalemate(std::string PLAYER_TURN)
           neccesaryMatingPieces++;
         }
         if (board[x_pos][y_pos].getChessPiece()->getType() == "KNIGHT") {
-          numKights++;
+          numKnights++;
         }
         numChessPieces++;
 
@@ -685,7 +685,7 @@ void ChessBoard::testForStalemate(std::string PLAYER_TURN)
   if (legalMoves == 0) {
     moveType = MoveType::StaleMate;
   } else if (neccesaryMatingPieces == 0) {
-    if (numChessPieces == 3 && numKnights == 1) {
+    if (numChessPieces == 3 && numKnights < 2) {
       moveType = MoveType::Draw;
     }
   }

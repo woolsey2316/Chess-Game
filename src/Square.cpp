@@ -8,21 +8,18 @@
 
 Square::Square()
 {
-  vulnerableSquare = false;
   chesspiece = NULL;
   SQUARE_PROMOTING_PAWN = false;
 }
 
 Square::Square(ChessPiecePtr piece)
 {
-  vulnerableSquare = false;
   chesspiece = piece;
   SQUARE_PROMOTING_PAWN = false;
 }
 
 Square::Square(ChessPiecePtr piece, bool topOrBottomSquare)
 {
-  vulnerableSquare = false;
   chesspiece = piece;
   SQUARE_PROMOTING_PAWN = topOrBottomSquare;
 }
@@ -75,7 +72,7 @@ bool Square::canPromotePawn()
   return SQUARE_PROMOTING_PAWN;
 }
 
-String getColour()
+std::string Square::getColour()
 {
-  return COLOUR;
+  return darkOrLight;
 }

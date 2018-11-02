@@ -14,7 +14,7 @@ class Square
   ChessPiecePtr chesspiece;
   bool SQUARE_PROMOTING_PAWN;
   bool darkSquare;
-  std::string COLOUR;
+  std::string darkOrLight;
 
   public:
   Square();
