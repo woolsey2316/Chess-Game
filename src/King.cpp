@@ -42,9 +42,13 @@ bool King::isDefending(int x_pos, int y_pos, int x_dest, int y_dest, std::string
 
 std::vector<std::array<int, 2>> King::possibleMoves(int x_pos, int y_pos)
 {
-  for (int i = 0; i <= 1; ++i) {
-    for (int j = 0; j <= 1; ++j) {
-      moveList.push_back(std::array<int, 2>{x_pos + i % 8, y_pos + j % 8});
+  for (int i = -1; i <= 1; ++i) {
+    for (int j = -1; j <= 1; ++j) {
+      if (i == 0 && j == 0) {
+        continue;
+      }
+      if (validGridCoords(x_pos, y_pos, x_pos + i, y_pos + j))
+      moveList.push_back(std::array<int, 2>{x_pos + i, y_pos + j});
     }
   }
 

@@ -29,6 +29,7 @@ class ChessBoard {
   ChessBoard();
   ChessPiecePtr chesspieceTouched;
   ChessPiecePtr capturedChesspiece;
+  ChessPiecePtr capturedChesspieceByEnPassant;
   void reset();
   //determines the type of move (capture, move to empty square, checkmate, etc.) ,
   MoveType playerMove(std::string turn, int x, int y, int x_dest, int y_dest);
@@ -82,6 +83,7 @@ class ChessBoard {
   void setEnPassant(bool pawnMoves2Squares);
   //unwinds invalid move
   void reverseMove(int x_pos,int y_pos,int x_dest,int y_dest);
+  void updateBoard(int x_pos,int y_pos,int x_dest,int y_dest);
 };
 
 #endif

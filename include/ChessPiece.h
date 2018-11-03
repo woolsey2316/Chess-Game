@@ -31,6 +31,7 @@ class ChessPiece {
 	void incrementTotalMoves();
 	bool matingPiece();
 	bool knightOrBishop();
+	bool validGridCoords(int x, int y, int dest_x, int dest_y);
 
 };
 

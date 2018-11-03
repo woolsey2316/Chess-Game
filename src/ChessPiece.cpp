@@ -48,3 +48,9 @@ bool ChessPiece::knightOrBishop()
 {
   return (type == "KNIGHT") || (type == "BISHOP");
 }
+
+bool ChessPiece::validGridCoords(int x_pos, int y_pos, int x_dest, int y_dest)
+{
+  return (x_pos >= 0 && x_pos < 8 && y_pos >= 0 && y_pos < 8) &&
+      (x_dest >= 0 && x_dest < 8 && y_dest >= 0 && y_dest < 8);
+}

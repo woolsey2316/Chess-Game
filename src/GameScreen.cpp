@@ -194,7 +194,7 @@ void GameScreen::loadChessSprites()
   background_t.loadFromFile("images/wood-background.jpg");
   background.setTexture(background_t);
 
-  gameBoard_t.loadFromFile("images/chessboard4.png");
+  gameBoard_t.loadFromFile("images/chessboard5.png");
   boardSprite.setTexture(gameBoard_t);
   boardSprite.scale(g_chessboardWidth/gameBoard_t.getSize().x,
       g_chessboardWidth/gameBoard_t.getSize().x);
@@ -203,6 +203,7 @@ void GameScreen::loadChessSprites()
   backButton_t.loadFromFile("images/backButton.png");
   backButton.setTexture(backButton_t);
   backButton.setPosition(190 + g_pixel_dx, 555 + g_pixel_dy);
+
   forwardButton_t.loadFromFile("images/forwardButton.png");
   forwardButton.setTexture(forwardButton_t);
   forwardButton.setPosition(295 + g_pixel_dx, 555 + g_pixel_dy);
