@@ -24,7 +24,6 @@ class ChessGame {
 
  public:
   ChessGame();
-  ~ChessGame();
   void finishGame(MoveType result);
   void saveGame();
   bool hasFinished();

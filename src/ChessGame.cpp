@@ -47,7 +47,7 @@ void ChessGame::setTurnToWhite()
 
 void ChessGame::loadSavedGame(std::string fileName) {
   setTurnToWhite();
-
+  hasEnded = false;
   std::ifstream infile;
   entireMoveHistory = "";
   moveList.clear();
