@@ -45,7 +45,8 @@ class ChessBoard {
   bool doesMoveResolveCheck(int x_pos, int y_pos,int dest_x, int dest_y);
   bool isPinnedToKing(int x_pos, int y_pos);
   bool breaksThePin(int x_pos, int y_pos, int x_dest, int y_dest);
-  bool isMoveLegal(int x_pos, int y_pos, int x_dest, int y_dest);
+  //Checks all legal move requirements
+  bool isMoveLegal(int x_pos, int y_pos, int x_dest, int y_dest, ChessPiecePtr);
   //Determines if there is a chesspiece between source and destination of moving chesspiece
   bool isPathBlocked(int x_pos, int y_pos, int x_dest, int y_dest);
   // determines whether your move placed yourself into check and hence invalidate the move

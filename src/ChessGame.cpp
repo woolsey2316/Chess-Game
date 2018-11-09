@@ -46,6 +46,8 @@ void ChessGame::setTurnToWhite()
 }
 
 void ChessGame::loadSavedGame(std::string fileName) {
+  setTurnToWhite();
+
   std::ifstream infile;
   entireMoveHistory = "";
   moveList.clear();
@@ -95,13 +97,15 @@ void ChessGame::setPlayer2Human(bool p2h)
 
 void ChessGame::reverseMove()
 {
-  moveList.pop_back();
-  if (entireMoveHistory.length() > 12) {
-    entireMoveHistory.erase(entireMoveHistory.length()-5,5);
-  } else {
-    entireMoveHistory = "";
+  if (!moveList.empty()) {
+    moveList.pop_back();
+    if (entireMoveHistory.length() > 12) {
+      entireMoveHistory.erase(entireMoveHistory.length()-5,5);
+    } else {
+      entireMoveHistory = "";
+    }
+    std::cout << std::endl << (entireMoveHistory);
   }
-  std::cout << std::endl << (entireMoveHistory);
 }
 
 Computer& ChessGame::getComputer()

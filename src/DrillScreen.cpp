@@ -39,6 +39,10 @@ int DrillScreen::Run(sf::RenderWindow &App)
   	  	  App.close();
   	  	  break;
   	    }
+        case sf::Event::MouseWheelScrolled: {
+          chessgame.reverseMove();
+          loadPosition(App);
+        }
   	    case sf::Event::MouseMoved: {
 
           if (backButton.getGlobalBounds().contains(mousePosF))
@@ -347,7 +351,10 @@ void DrillScreen::move(Coordinates oldCoords, Coordinates newCoords,
     chessgame.finishGame(moveType);
     std::cout << "Draw" << std::endl;
 
+  } else if (moveType == MoveType::Invalid) {
+    std::cout << "invalid Move" << std::endl;
   }
+
 }
 
 void DrillScreen::promotePawn(int index, sf::Vector2f dest)
@@ -365,12 +372,13 @@ void DrillScreen::loadPosition(sf::RenderWindow &App)
 {
   if (!isPressed) {
     chessboard.reset();
-    chessgame.setTurnToWhite();
     loadChessSprites();
 
     std::string moves = chessgame.getEntireMoveHistory();
     for(int i=0;i<moves.length();i+=5) {
+
       std::string coords = moves.substr(i,4);
+      std::cout << coords << std::endl;
       oldCoordinates.setCoords(coords.substr(0,2));
       newCoordinates.setCoords(coords.substr(2,2));
       moveType = chessboard.playerMove(chessgame.getTurn(),
