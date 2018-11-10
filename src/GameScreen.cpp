@@ -1,5 +1,8 @@
 #include "GameScreen.h"
 #include "global.h"
+#include "CheckMateScreen.h"
+#include "LayoutScreen.h"
+
 #include <boost/algorithm/string.hpp>
 #include <sstream>
 #include <chrono>
@@ -29,7 +32,8 @@ int GameScreen::Run(sf::RenderWindow &App)
   bool running = true;
   while (running) {
   	mousePosition = sf::Mouse::getPosition(App);
-  	sf::Vector2f mousePosF(static_cast<float>(mousePosition.x), static_cast<float>( mousePosition.y ));
+  	sf::Vector2f mousePosF(static_cast<float>(mousePosition.x),
+                           static_cast<float>( mousePosition.y ));
   	sf::Event e;
   	while (App.pollEvent(e)) {
       switch (e.type) {
@@ -38,29 +42,18 @@ int GameScreen::Run(sf::RenderWindow &App)
   	  	  break;
   	    }
   	    case sf::Event::MouseMoved: {
-
-          if (backButton.getGlobalBounds().contains(mousePosF))
+          if (settings.getGlobalBounds().contains(mousePosF))
           {
-            backButton.setColor(sf::Color(250, 20, 20));
-          }
-          else
-          {
-            backButton.setColor(sf::Color(250, 255, 255));
-          }
-          if (forwardButton.getGlobalBounds().contains(mousePosF))
-          {
-            forwardButton.setColor(sf::Color(255, 20, 20));
-          }
-          else
-          {
-            forwardButton.setColor(sf::Color(250, 255, 255));
+            settings.setColor(sf::Color(220, 220, 220));
+          } else {
+            settings.setColor(sf::Color(190, 190, 190));
           }
           break;
   	    }
   	    case sf::Event::MouseButtonPressed : {
           if (e.key.code == sf::Mouse::Left) {
-            if (backButton.getGlobalBounds().contains(mousePosF)) {
-              reverseMove(App);
+            if (settings.getGlobalBounds().contains(mousePosF)) {
+              LayoutScreen layoutScreen;
               buttonPressed = true;
             }
             dragChessPiece();
@@ -95,14 +88,13 @@ int GameScreen::Run(sf::RenderWindow &App)
 
 void GameScreen::refreshDisplay(sf::RenderWindow &App) {
   App.clear();
+  App.draw(background);
   App.draw(sidePanel);
   App.draw(boardSprite);
-  App.draw(background);
+  App.draw(settings);
   for (int i = 0; i < 32; ++i) {
       App.draw(chesspieceSprite[i]);
   }
-  App.draw(backButton);
-  App.draw(forwardButton);
   App.display();
 }
 
@@ -194,19 +186,15 @@ void GameScreen::loadChessSprites()
   background_t.loadFromFile("images/wood-background.jpg");
   background.setTexture(background_t);
 
-  gameBoard_t.loadFromFile("images/chessboard5.png");
+  gameBoard_t.loadFromFile("images/chessboard2.png");
   boardSprite.setTexture(gameBoard_t);
   boardSprite.scale(g_chessboardWidth/gameBoard_t.getSize().x,
       g_chessboardWidth/gameBoard_t.getSize().x);
   boardSprite.setPosition(g_pixel_dx, g_pixel_dy);
 
-  backButton_t.loadFromFile("images/backButton.png");
-  backButton.setTexture(backButton_t);
-  backButton.setPosition(190 + g_pixel_dx, 555 + g_pixel_dy);
-
-  forwardButton_t.loadFromFile("images/forwardButton.png");
-  forwardButton.setTexture(forwardButton_t);
-  forwardButton.setPosition(295 + g_pixel_dx, 555 + g_pixel_dy);
+  settings_t.loadFromFile("images/settings.png");
+  settings.setTexture(settings_t);
+  settings.setPosition({620.f, g_pixel_dy + 20});
 
   int index=0;
   for(int i=0;i<8;++i) {
@@ -299,6 +287,7 @@ void GameScreen::move(Coordinates oldCoords, Coordinates newCoords,
         chesspieceSprite[i].setPosition(-100,-100);
       }
     }
+    CheckMateScreen CheckMateScreen;
     chesspieceSprite[touchedByPlayer].setPosition(dest);
     chessgame.finishGame(moveType);
 

@@ -8,7 +8,6 @@
 #include "Bishop.h"
 #include "Square.h"
 #include "Matrix.h"
-#include "CheckMateScreen.h"
 #include "PromotionScreen.h"
 
 #include <vector>
@@ -341,12 +340,10 @@ CheckStatus ChessBoard::determineCheckStatus(std::string COLOUR, bool opponentKi
         }
       }
       std::cout << "Check Mate" << std::endl;
-      CheckMateScreen CheckMateScreen;
       return CheckStatus::CheckMate;
     }
   } else if (checkStatus == CheckStatus::DoubleCheck) {
     if (!kingCanEscape(kingIndex, COLOUR)) {
-      CheckMateScreen CheckMateScreen;
       return CheckStatus::CheckMate;
     }
   }

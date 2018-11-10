@@ -13,9 +13,6 @@ class CheckMateScreen
     CheckMateScreen();
     int Run(sf::RenderWindow &window);
 
-
-  protected:
-
   private:
   sf::Texture texture;
   sf::Vector2i mousePosition;

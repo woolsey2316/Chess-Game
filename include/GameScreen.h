@@ -59,8 +59,8 @@ class GameScreen : public cScreen {
   sf::Sprite background;
   sf::Texture gameBoard_t;
   sf::Sprite boardSprite;
-  sf::Sprite backButton;
-  sf::Texture backButton_t;
+  sf::Sprite settings;
+  sf::Texture settings_t;
   sf::Sprite forwardButton;
   sf::Texture forwardButton_t;
 

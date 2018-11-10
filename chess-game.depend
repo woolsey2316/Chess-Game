@@ -16,7 +16,7 @@
 
 1534875260 source:c:\users\david\documents\programming\c++\chess-game\src\checkstatus.cpp
 
-1541829518 source:c:\users\david\documents\programming\c++\chess-game\src\chessboard.cpp
+1541851064 source:c:\users\david\documents\programming\c++\chess-game\src\chessboard.cpp
 	"Pawn.h"
 	"ChessBoard.h"
 	"ChessPiece.h"
@@ -27,7 +27,6 @@
 	"Bishop.h"
 	"Square.h"
 	"Matrix.h"
-	"CheckMateScreen.h"
 	"PromotionScreen.h"
 	<vector>
 	<array>
@@ -7437,8 +7436,9 @@
 	<boost/algorithm/string/finder.hpp>
 	<boost/algorithm/string/formatter.hpp>
 
-1537889088 source:c:\users\david\documents\programming\c++\chess-game\src\analysisscreen.cpp
+1541853124 source:c:\users\david\documents\programming\c++\chess-game\src\analysisscreen.cpp
 	"AnalysisScreen.h"
+	"CheckMateScreen.h"
 	"GameScreen.h"
 	"global.h"
 	<boost/algorithm/string.hpp>
@@ -7468,16 +7468,18 @@
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
 
-1541849708 source:c:\users\david\documents\programming\c++\chess-game\src\gamescreen.cpp
+1541855645 source:c:\users\david\documents\programming\c++\chess-game\src\gamescreen.cpp
 	"GameScreen.h"
 	"global.h"
+	"CheckMateScreen.h"
+	"LayoutScreen.h"
 	<boost/algorithm/string.hpp>
 	<sstream>
 	<chrono>
 	<thread>
 	<iostream>
 
-1538057638 c:\users\david\documents\programming\c++\chess-game\include\gamescreen.h
+1541850688 c:\users\david\documents\programming\c++\chess-game\include\gamescreen.h
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
@@ -7536,15 +7538,16 @@
 1536680329 source:c:\users\david\documents\programming\c++\chess-game\src\checkmatescreen.cpp
 	"CheckMateScreen.h"
 
-1536679164 c:\users\david\documents\programming\c++\chess-game\include\checkmatescreen.h
+1541852982 c:\users\david\documents\programming\c++\chess-game\include\checkmatescreen.h
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
 	<string>
 	"global.h"
 
-1541828888 source:c:\users\david\documents\programming\c++\chess-game\src\drillscreen.cpp
+1541853133 source:c:\users\david\documents\programming\c++\chess-game\src\drillscreen.cpp
 	"DrillScreen.h"
+	"CheckMateScreen.h"
 	"GameScreen.h"
 	"global.h"
 	<boost/algorithm/string.hpp>
@@ -7840,4 +7843,14 @@
 	<nlohmann/detail/conversions/to_json.hpp>
 
 1537438864 c:\libs\c++\nlohmann\detail\macro_unscope.hpp
+
+1541854660 source:c:\users\david\documents\programming\c++\chess-game\src\layoutscreen.cpp
+	"LayoutScreen.h"
+
+1541858080 c:\users\david\documents\programming\c++\chess-game\include\layoutscreen.h
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<string>
+	"global.h"
 

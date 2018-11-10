@@ -1,5 +1,6 @@
 #include "DrillScreen.h"
 
+#include "CheckMateScreen.h"
 #include "GameScreen.h"
 #include "global.h"
 #include <boost/algorithm/string.hpp>
@@ -239,7 +240,7 @@ void DrillScreen::loadChessSprites()
     drillType[i].setColor(sf::Color(105,105,105));
 	}
 
-  gameBoard_t.loadFromFile("images/chessboard4.png");
+  gameBoard_t.loadFromFile("images/chessboard2.png");
   boardSprite.setTexture(gameBoard_t);
   boardSprite.scale(g_chessboardWidth/gameBoard_t.getSize().x,
       g_chessboardWidth/gameBoard_t.getSize().x);

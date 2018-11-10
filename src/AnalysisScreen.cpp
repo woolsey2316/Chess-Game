@@ -1,5 +1,6 @@
 #include "AnalysisScreen.h"
 
+#include "CheckMateScreen.h"
 #include "GameScreen.h"
 #include "global.h"
 #include <boost/algorithm/string.hpp>
@@ -198,7 +199,7 @@ void AnalysisScreen::loadChessSprites()
   sidePanel_t.loadFromFile("images/wood-background.jpg");
   sidePanel.setTexture(sidePanel_t);
 
-  gameBoard_t.loadFromFile("images/chessboard4.png");
+  gameBoard_t.loadFromFile("images/chessboard2.png");
   boardSprite.setTexture(gameBoard_t);
   boardSprite.scale(g_chessboardWidth/gameBoard_t.getSize().x,
       g_chessboardWidth/gameBoard_t.getSize().x);
