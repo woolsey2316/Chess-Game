@@ -1,4 +1,7 @@
 #include "Connector.h"
+#include <string>
+#include <iostream>
+#include <sstream>
 
 void Connector::connectToEngine(char* path)
 {
@@ -47,6 +50,69 @@ std::string Connector::getCompMove(std::string position, Computer comp)
     }
 
     return "error";
+}
+
+std::vector<std::array<std::string, 2>> Connector::getScore(std::string position, Computer comp)
+{
+	std::string str;
+	std::string messageToEngine;
+
+	messageToEngine += "position startpos moves "+position+"\n"
+      + "go depth "+comp.getDepth()+"\n"
+      + "setoption name MultiPV value 5\n";
+
+	WriteFile(pipin_w, messageToEngine.c_str(), messageToEngine.length(),&writ, NULL);
+    Sleep(100);
+
+    PeekNamedPipe(pipout_r, buffer,sizeof(buffer), &read, &available, NULL);
+    do
+    {
+    ZeroMemory(buffer, sizeof(buffer));
+		if(!ReadFile(pipout_r, buffer, sizeof(buffer), &read, NULL) || !read) break;
+        buffer[read] = 0;
+		str+=(char*)buffer;
+    }
+    while(read >= sizeof(buffer));
+
+    std::vector<std::array<std::string, 2>> positions;
+
+    size_t scoreIndex = str.find("score cp ", 0)+9;
+    size_t moveListIndex = str.find("multipv 1 pv ", 0);
+    int centipawns = 0;
+    size_t linenumber = 0;
+    size_t previousScoreIndex = 0;
+    size_t endofLineIndex = 0;
+
+    //finding all possible move variations recommended by engine
+    while(scoreIndex > previousScoreIndex)
+    {
+        moveListIndex = str.find(" pv ", moveListIndex+1)+4;
+        if (scoreIndex!=-1) {
+          std::string num = str.substr(scoreIndex,5);
+          if (num[0] == '-' || (num[0] >= '1' && num[0] <= '9')) {
+            for (int i = 0; i < 6; ++i) {
+              if (num[i] >= '1' && num[i] <= '9' ) {
+                if (num[0]== '-') {
+                    continue;
+                }
+
+              } else {
+              centipawns = std::stoi(num.substr(0,i-1));
+              break;
+              }
+            }
+          }
+        }
+        endofLineIndex = str.substr(moveListIndex,50).find("\n");
+        if (moveListIndex!=-1) {
+          positions.push_back(std::array<std::string,2>{
+            std::to_string(centipawns),
+            str.substr(moveListIndex,endofLineIndex)});
+        }
+        previousScoreIndex = scoreIndex;
+        scoreIndex = str.find("score cp ", scoreIndex+1)+9;
+    }
+    return positions;
 }
 
 void Connector::closeConnection()

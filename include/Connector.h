@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 #include <Computer.h>
+#include <vector>
+#include <array>
 
 class Connector{
  private:
@@ -20,5 +22,6 @@ class Connector{
   void connectToEngine(char* path);
   void closeConnection();
   std::string getCompMove(std::string position, Computer comp);
+  std::vector<std::array<std::string, 2>> getScore(std::string position, Computer comp);
 };
 #endif

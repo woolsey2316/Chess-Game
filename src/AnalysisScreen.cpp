@@ -112,7 +112,13 @@ void AnalysisScreen::computerMove()
   std::string compMove = connector.getCompMove(
                   chessgame.getEntireMoveHistory(),
                   comp);
-  std::cout << compMove << std::endl;
+  std::vector<std::array<std::string, 2>> variations = connector.getScore(
+                  chessgame.getEntireMoveHistory(),
+                  comp);
+  for (const auto & elem : variations) {
+     std::cout << elem[0] << " | " <<  elem[1] << std::endl;
+  }
+
   if (compMove == "error") {
     std::cout << "error" << std::endl;
     return;

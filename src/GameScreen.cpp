@@ -18,7 +18,7 @@ GameScreen::GameScreen()
 {
   canReverseMoves = false;
   connector.connectToEngine((char *)"stockfish.exe");
-  chessgame.setPlayer2Human(true);
+  chessgame.setPlayer2Human(false);
   chessboard = chessgame.getChessBoard();
 }
 
@@ -111,7 +111,7 @@ void GameScreen::computerMove()
   std::string compMove = connector.getCompMove(
                   chessgame.getEntireMoveHistory(),
                   comp);
-  std::cout << compMove << std::endl;
+
   if (compMove == "error") {
     std::cout << "error" << std::endl;
     return;

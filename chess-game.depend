@@ -16,7 +16,7 @@
 
 1534875260 source:c:\users\david\documents\programming\c++\chess-game\src\checkstatus.cpp
 
-1541778781 source:c:\users\david\documents\programming\c++\chess-game\src\chessboard.cpp
+1541829518 source:c:\users\david\documents\programming\c++\chess-game\src\chessboard.cpp
 	"Pawn.h"
 	"ChessBoard.h"
 	"ChessPiece.h"
@@ -517,15 +517,20 @@
 	<string>
 	"ChessPiece.h"
 
-1540998460 source:c:\users\david\documents\programming\c++\chess-game\src\connector.cpp
+1541850102 source:c:\users\david\documents\programming\c++\chess-game\src\connector.cpp
 	"Connector.h"
+	<string>
+	<iostream>
+	<sstream>
 
-1536504719 c:\users\david\documents\programming\c++\chess-game\include\connector.h
+1541827095 c:\users\david\documents\programming\c++\chess-game\include\connector.h
 	<windows.h>
 	<stdio.h>
 	<iostream>
 	<string>
 	<Computer.h>
+	<vector>
+	<array>
 
 1536345402 source:c:\users\david\documents\programming\c++\chess-game\src\coordinates.cpp
 	"Coordinates.h"
@@ -7463,7 +7468,7 @@
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
 
-1541175334 source:c:\users\david\documents\programming\c++\chess-game\src\gamescreen.cpp
+1541849708 source:c:\users\david\documents\programming\c++\chess-game\src\gamescreen.cpp
 	"GameScreen.h"
 	"global.h"
 	<boost/algorithm/string.hpp>
@@ -7538,7 +7543,7 @@
 	<string>
 	"global.h"
 
-1541777748 source:c:\users\david\documents\programming\c++\chess-game\src\drillscreen.cpp
+1541828888 source:c:\users\david\documents\programming\c++\chess-game\src\drillscreen.cpp
 	"DrillScreen.h"
 	"GameScreen.h"
 	"global.h"

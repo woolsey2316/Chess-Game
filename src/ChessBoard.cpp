@@ -751,6 +751,8 @@ void ChessBoard::testForStalemate(std::string PLAYER_TURN)
   } else if (neccesaryMatingPieces == 0) {
     if (numChessPieces == 3 && numKnights < 2) {
       moveType = MoveType::Draw;
+    } else if (numChessPieces == 2) {
+      moveType = MoveType::Draw;
     }
   }
 }
