@@ -76,6 +76,7 @@
 		<Unit filename="include/GameScreen.h" />
 		<Unit filename="include/King.h" />
 		<Unit filename="include/Knight.h" />
+		<Unit filename="include/LayoutScreen.h" />
 		<Unit filename="include/MainScreen.h" />
 		<Unit filename="include/Matrix.h" />
 		<Unit filename="include/MoveType.h" />
@@ -103,6 +104,7 @@
 		<Unit filename="src/GameScreen.cpp" />
 		<Unit filename="src/King.cpp" />
 		<Unit filename="src/Knight.cpp" />
+		<Unit filename="src/LayoutScreen.cpp" />
 		<Unit filename="src/MainScreen.cpp" />
 		<Unit filename="src/MoveType.cpp" />
 		<Unit filename="src/Pawn.cpp" />

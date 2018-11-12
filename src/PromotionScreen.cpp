@@ -25,7 +25,6 @@ std::string PromotionScreen::Run(sf::RenderWindow &promote)
   	while (promote.pollEvent(e)) {
       switch (e.type) {
         case sf::Event::Closed: {
-  	  	  promote.close();
   	  	  break;
   	    }
   	    case sf::Event::MouseButtonPressed : {

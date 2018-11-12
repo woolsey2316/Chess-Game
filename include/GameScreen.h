@@ -30,6 +30,9 @@ class GameScreen : public cScreen {
   void moveSprite(MoveType moveType);
   void reverseMove(sf::RenderWindow &App);
   void refreshDisplay(sf::RenderWindow &App);
+  void setChessBoardFile(std::string file);
+  void stopRotatingChesspieces();
+  void rotateChesspieces();
   ChessBoard getChessBoard();
   Computer comp;
   std::array<sf::Texture, 32> texture;
@@ -37,6 +40,7 @@ class GameScreen : public cScreen {
   sf::Font Font;
 
  private:
+  std::string chessBoardFile = "images/chessboard2.png";
   ChessGame chessgame;
   bool canReverseMoves;
   Connector connector;
@@ -61,8 +65,10 @@ class GameScreen : public cScreen {
   sf::Sprite boardSprite;
   sf::Sprite settings;
   sf::Texture settings_t;
-  sf::Sprite forwardButton;
-  sf::Texture forwardButton_t;
+  sf::Texture mainMenu_t;
+  sf::Sprite mainMenu;
+  sf::Texture retry_t;
+  sf::Sprite retry;
 
 };
 

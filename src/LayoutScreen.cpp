@@ -1,28 +1,26 @@
 #include "LayoutScreen.h"
 
-LayoutScreen::LayoutScreen()
+LayoutScreen::LayoutScreen(std::string fileName_)
 {
+  fileName = fileName_;
   sf::RenderWindow window(sf::VideoMode(854, 444), "Set Layout");
 
-  for (int i = 0; i < 4; ++i) {
+  for (size_t i = 0; i < 4; ++i) {
     chessboard_t[i].loadFromFile("images/chessboard" + std::to_string(i) + ".png");
     chessboardSprite[i].setTexture(chessboard_t[i]);
     chessboardSprite[i].scale(0.15, 0.15);
-    chessboardSprite[i].setPosition(100*i, 10);
+    chessboardSprite[i].setPosition(120*i, 10);
 
-    rectangle[i].setSize(sf::Vector2f(100, 100));
+    rectangle[i].setSize(sf::Vector2f(0.15*600+10, 0.15*600+10));
     rectangle[i].setFillColor(sf::Color(200,200,200));
     rectangle[i].setSize(sf::Vector2f(100, 100));
-    rectangle[i].setPosition(40*i, 10);
-
+    rectangle[i].setPosition(120*i-5, 10-5);
 
   }
-
   Run(window);
-
 }
 
-int LayoutScreen::Run(sf::RenderWindow &window)
+std::string LayoutScreen::Run(sf::RenderWindow &window)
 {
   bool running = true;
   while (running) {
@@ -34,18 +32,51 @@ int LayoutScreen::Run(sf::RenderWindow &window)
       switch (e.type) {
         case sf::Event::Closed: {
   	  	  window.close();
-  	  	  return -1;
+  	  	  return "";
   	  	  break;
   	    }
+  	    case sf::Event::MouseMoved: {
+  	      for (size_t i = 0; i < 4; ++i) {
+            if (rectangle[i].getGlobalBounds().contains(mousePosF))
+            {
+              rectangle[i].setFillColor(sf::Color(255, 255, 255));
+            } else {
+              rectangle[i].setFillColor(sf::Color(200, 200, 200));
+            }
+  	      }
+  	      break;
+        }
+
+        case sf::Event::MouseButtonPressed: {
+          for (size_t i = 0; i < 4; i++) {
+            if (chessboardSprite[i].getGlobalBounds().contains(mousePosF)) {
+              fileName = "images/chessboard" + std::to_string(i) + ".png";
+              window.close();
+              return fileName;
+            }
+          }
+          break;
+        }
       }
+
     }
-    for (int i = 0; i < 4; ++i) {
-      window.draw(chessboardSprite[i]);
+    for (size_t i = 0; i < 4; ++i) {
       window.draw(rectangle[i]);
+      window.draw(chessboardSprite[i]);
     }
     window.display();
 
   }
-  return -1;
+  return "";
+}
+
+std::string LayoutScreen::getChosenImageFile() {
+  return fileName;
+}
+
+std::string LayoutScreen::setChosenImageFile(std::string fileName_) {
+  if (fileName != "") {
+    fileName = fileName_;
+  }
 }
 

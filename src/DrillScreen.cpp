@@ -27,7 +27,7 @@ DrillScreen::DrillScreen()
 
 int DrillScreen::Run(sf::RenderWindow &App)
 {
-  loadChessSprites();
+  loadScreen();
 
   bool running = true;
   while (running) {
@@ -97,8 +97,9 @@ int DrillScreen::Run(sf::RenderWindow &App)
             }
             buttonPressed = false;
           }
-        }
           break;
+        }
+
       }
       if (isPressed) {
         chesspieceSprite[touchedByPlayer].setPosition(mousePosition.x-dx,
@@ -137,12 +138,6 @@ void DrillScreen::computerMove()
   std::string compMove = connector.getCompMove(
                   chessgame.getEntireMoveHistory(),
                   comp);
-  std::vector<std::array<std::string, 2>> variations = connector.getScore(
-                  chessgame.getEntireMoveHistory(),
-                  comp);
-  for (const auto & elem : variations) {
-     std::cout << elem[0] << "  " << elem[1] << std::endl;
-  }
 
   if (compMove == "error") {
     std::cout << "error" << std::endl;
@@ -219,6 +214,24 @@ void DrillScreen::moveSprite(MoveType moveType)
 
 void DrillScreen::loadChessSprites()
 {
+  int index=0;
+  for(int i=0;i<8;++i) {
+    for (int j=0;j<8;++j) {
+      if (board_[i][j] == "empty") {
+        continue;
+      }
+      texture[index].loadFromFile("images/" + board_[i][j] + ".png");
+
+      chesspieceSprite[index].setTexture(texture[index]);
+      chesspieceSprite[index].setPosition(g_squareSize*j + 0.0625*g_squareSize + g_pixel_dx,
+                                          g_squareSize*i + 0.125*g_squareSize + g_pixel_dy);
+      index++;
+    }
+  }
+}
+
+void DrillScreen::loadScreen()
+{
   background_t.loadFromFile("images/wood-background.jpg");
   background.setTexture(background_t);
   sidePanel_t.loadFromFile("images/sidePanel.png");
@@ -253,21 +266,8 @@ void DrillScreen::loadChessSprites()
   forwardButton.setTexture(forwardButton_t);
   forwardButton.setPosition(295 + g_pixel_dx, 555 + g_pixel_dy);
 
+  loadChessSprites();
 
-  int index=0;
-  for(int i=0;i<8;++i) {
-    for (int j=0;j<8;++j) {
-      if (board_[i][j] == "empty") {
-        continue;
-      }
-      texture[index].loadFromFile("images/" + board_[i][j] + ".png");
-
-      chesspieceSprite[index].setTexture(texture[index]);
-      chesspieceSprite[index].setPosition(g_squareSize*j + 0.0625*g_squareSize + g_pixel_dx,
-                                          g_squareSize*i + 0.125*g_squareSize + g_pixel_dy);
-      index++;
-    }
-  }
 }
 
 void DrillScreen::move(Coordinates oldCoords, Coordinates newCoords,
@@ -345,6 +345,7 @@ void DrillScreen::move(Coordinates oldCoords, Coordinates newCoords,
         chesspieceSprite[i].setPosition(-100,-100);
       }
     }
+    CheckMateScreen checkMateScreen;
     chesspieceSprite[touchedByPlayer].setPosition(dest);
     chessgame.finishGame(moveType);
 

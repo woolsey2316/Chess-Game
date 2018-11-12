@@ -7,6 +7,7 @@
 #include "GameScreen.h"
 #include "MainScreen.h"
 #include "DrillScreen.h"
+#include "AnalysisScreen.h"
 
 class Screens
 {

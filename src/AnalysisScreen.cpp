@@ -22,7 +22,7 @@ AnalysisScreen::AnalysisScreen()
   canReverseMoves = false;
   connector.connectToEngine((char *)"stockfish.exe");
   //computer ordinary match
-  chessgame.setPlayer2Human(true);
+  chessgame.setPlayer2Human(false);
   chessboard = chessgame.getChessBoard();
 }
 
@@ -108,6 +108,7 @@ void AnalysisScreen::refreshDisplay(sf::RenderWindow &App) {
   App.draw(forwardButton);
   App.display();
 }
+
 void AnalysisScreen::computerMove()
 {
   std::string compMove = connector.getCompMove(
@@ -303,6 +304,7 @@ void AnalysisScreen::move(Coordinates oldCoords, Coordinates newCoords,
         chesspieceSprite[i].setPosition(-100,-100);
       }
     }
+    CheckMateScreen checkMateScreen;
     chesspieceSprite[touchedByPlayer].setPosition(dest);
     chessgame.saveGame();
   }

@@ -1,9 +1,6 @@
 #ifndef ANALYSISSCREEN_H
 #define ANALYSISSCREEN_H
 
-#include "cScreen.h"
-
-
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>

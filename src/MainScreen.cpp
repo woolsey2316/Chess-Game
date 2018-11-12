@@ -14,13 +14,14 @@ int MainScreen::Run(sf::RenderWindow &App)
 	bool Running = true;
 	sf::Texture Texture;
 	sf::Sprite Sprite;
-	int alpha = 0;
 	sf::Font Font;
 	sf::Text Menu1;
 	sf::Text Menu2;
 	sf::Text Menu3;
   sf::Text Menu4;
-	int menu = 0;
+  sf::Text Menu5;
+  int alpha = 0;
+	int menu = -1;
 
 	if (!Texture.loadFromFile("images/Main Screen.jpg"))
 	{
@@ -52,8 +53,13 @@ int MainScreen::Run(sf::RenderWindow &App)
 
   Menu4.setFont(Font);
 	Menu4.setCharacterSize(20);
-	Menu4.setString("Exit");
+	Menu4.setString("Analysis");
 	Menu4.setPosition({280.f, 280.f});
+
+  Menu5.setFont(Font);
+	Menu5.setCharacterSize(20);
+	Menu5.setString("Exit");
+	Menu5.setPosition({280.f, 340.f});
 
 	while (Running)
 	{
@@ -87,6 +93,11 @@ int MainScreen::Run(sf::RenderWindow &App)
 				} else {
 				  Menu4.setColor(sf::Color(250, 255, 255));
 				}
+        if (Menu5.getGlobalBounds().contains(mousePosF)) {
+				  Menu5.setColor(sf::Color(250, 20, 20));
+				} else {
+				  Menu5.setColor(sf::Color(250, 255, 255));
+				}
 			}
 			if (Event.type == sf::Event::MouseButtonPressed) {
         if (Menu1.getGlobalBounds().contains(mousePosF)) {
@@ -97,6 +108,8 @@ int MainScreen::Run(sf::RenderWindow &App)
 				  menu = 2;
 				} else if (Menu4.getGlobalBounds().contains(mousePosF)) {
 				  menu = 3;
+				} else if (Menu5.getGlobalBounds().contains(mousePosF)) {
+				  menu = 4;
 				}
 				if (menu == 0) {
 				  playing = true;
@@ -106,7 +119,9 @@ int MainScreen::Run(sf::RenderWindow &App)
 				} else if (menu == 2) {
           return (3);
 				} else if (menu == 3) {
-          return (4);
+          return (3);
+				} else if (menu == 4) {
+          return (-1);
 				}
 			}
 		}
@@ -131,6 +146,7 @@ int MainScreen::Run(sf::RenderWindow &App)
     }
     App.draw(Menu2);
     App.draw(Menu4);
+    App.draw(Menu5);
   }
   App.display();
 }

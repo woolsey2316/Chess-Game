@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
+
 #include <time.h>
 #include <string>
 #include <Screens.h>
@@ -18,11 +19,11 @@ int main()
 	Screens.push_back(&s2);
   DrillScreen s3;
   Screens.push_back(&s3);
+  AnalysisScreen s4;
+  Screens.push_back(&s4);
 	while (screen >= 0)
 	{
 		screen = Screens[screen]->Run(App);
 	}
-
 	return EXIT_SUCCESS;
-  return 0;
 }

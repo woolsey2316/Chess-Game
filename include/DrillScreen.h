@@ -18,6 +18,7 @@ class DrillScreen : public cScreen {
   size_t getChessBoardSquareSize();
   void move(Coordinates oldCoords, Coordinates newCoords, MoveType moveType, int touchedByPlayer);
   void playerMove(sf::Vector2f start, sf::Vector2f dest, MoveType moveType);
+  void loadScreen();
   void loadChessSprites();
   void computerMove();
   void promotePawn(int index, sf::Vector2f dest);

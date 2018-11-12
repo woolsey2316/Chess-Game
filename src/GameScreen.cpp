@@ -23,16 +23,16 @@ GameScreen::GameScreen()
   connector.connectToEngine((char *)"stockfish.exe");
   chessgame.setPlayer2Human(false);
   chessboard = chessgame.getChessBoard();
+  loadChessSprites();
 }
 
 int GameScreen::Run(sf::RenderWindow &App)
 {
-  loadChessSprites();
 
   bool running = true;
   while (running) {
   	mousePosition = sf::Mouse::getPosition(App);
-  	sf::Vector2f mousePosF(static_cast<float>(mousePosition.x),
+  	sf::Vector2f mousePosF(static_cast<float>( mousePosition.x ),
                            static_cast<float>( mousePosition.y ));
   	sf::Event e;
   	while (App.pollEvent(e)) {
@@ -41,6 +41,28 @@ int GameScreen::Run(sf::RenderWindow &App)
   	  	  App.close();
   	  	  break;
   	    }
+  	    case sf::Event::LostFocus: {
+          rotateChesspieces();
+          break;
+  	    }
+  	    case sf::Event::GainedFocus: {
+          stopRotatingChesspieces();
+          break;
+  	    }
+  	    case sf::Event::TextEntered: {
+  	    }
+        case sf::Event::KeyPressed: {
+  	    }
+        case sf::Event::KeyReleased: {
+  	    }
+        case sf::Event::MouseWheelMoved: {
+  	    }
+        case sf::Event::MouseWheelScrolled: {
+  	    }
+        case sf::Event::MouseEntered: {
+  	    }
+        case sf::Event::MouseLeft: {
+  	    }
   	    case sf::Event::MouseMoved: {
           if (settings.getGlobalBounds().contains(mousePosF))
           {
@@ -48,15 +70,26 @@ int GameScreen::Run(sf::RenderWindow &App)
           } else {
             settings.setColor(sf::Color(190, 190, 190));
           }
+          if (mainMenu.getGlobalBounds().contains(mousePosF))
+          {
+            mainMenu.setColor(sf::Color(220, 220, 220));
+          } else {
+            mainMenu.setColor(sf::Color(0, 0, 0));
+          }
           break;
   	    }
   	    case sf::Event::MouseButtonPressed : {
           if (e.key.code == sf::Mouse::Left) {
             if (settings.getGlobalBounds().contains(mousePosF)) {
-              LayoutScreen layoutScreen;
+              LayoutScreen layoutScreen(chessBoardFile);
+              setChessBoardFile(layoutScreen.getChosenImageFile());
               buttonPressed = true;
             }
-            dragChessPiece();
+            if (mainMenu.getGlobalBounds().contains(mousePosF))
+            {
+              return 0;
+            }
+              dragChessPiece();
 
           }
           break;
@@ -92,7 +125,9 @@ void GameScreen::refreshDisplay(sf::RenderWindow &App) {
   App.draw(sidePanel);
   App.draw(boardSprite);
   App.draw(settings);
-  for (int i = 0; i < 32; ++i) {
+  App.draw(mainMenu);
+  App.draw(retry);
+  for (size_t i = 0; i < 32; ++i) {
       App.draw(chesspieceSprite[i]);
   }
   App.display();
@@ -115,7 +150,7 @@ void GameScreen::computerMove()
                                    oldCoordinates.getIntegerCoords()[0],
                                    newCoordinates.getIntegerCoords()[1],
                                    newCoordinates.getIntegerCoords()[0]);
-  for (int i=0;i<32;i++){
+  for (size_t i=0;i<32;i++){
     if (chesspieceSprite[i].getGlobalBounds()
         .contains(oldCoordinates.getPixelCoords())) {
       touchedByComputer=i;
@@ -143,7 +178,6 @@ void GameScreen::dragChessPiece()
     chesspieceSprite[touchedByPlayer].setPosition(mousePosition.x-dx,
                                                   mousePosition.y-dy);
   }
-
 }
 
 MoveType GameScreen::letGoOfPiece()
@@ -186,19 +220,27 @@ void GameScreen::loadChessSprites()
   background_t.loadFromFile("images/wood-background.jpg");
   background.setTexture(background_t);
 
-  gameBoard_t.loadFromFile("images/chessboard2.png");
+  gameBoard_t.loadFromFile(chessBoardFile);
   boardSprite.setTexture(gameBoard_t);
-  boardSprite.scale(g_chessboardWidth/gameBoard_t.getSize().x,
-      g_chessboardWidth/gameBoard_t.getSize().x);
   boardSprite.setPosition(g_pixel_dx, g_pixel_dy);
+  boardSprite.scale(g_chessboardWidth/gameBoard_t.getSize().x,
+    g_chessboardWidth/gameBoard_t.getSize().x);
 
   settings_t.loadFromFile("images/settings.png");
   settings.setTexture(settings_t);
-  settings.setPosition({620.f, g_pixel_dy + 20});
+  settings.setPosition({605, g_pixel_dy + 10});
 
-  int index=0;
-  for(int i=0;i<8;++i) {
-    for (int j=0;j<8;++j) {
+  retry_t.loadFromFile("images/retry.png");
+  retry.setTexture(retry_t);
+  retry.setPosition({605, g_pixel_dy + 520});
+
+  mainMenu_t.loadFromFile("images/main_menu.png");
+  mainMenu.setTexture(mainMenu_t);
+  mainMenu.setPosition({860, g_pixel_dy + 10});
+
+  size_t index=0;
+  for(size_t i=0;i<8;++i) {
+    for (size_t j=0;j<8;++j) {
       if (board_[i][j] == "empty") {
         continue;
       }
@@ -258,7 +300,6 @@ void GameScreen::move(Coordinates oldCoords, Coordinates newCoords,
     }
     chesspieceSprite[touchedByPlayer].setPosition(dest);
 
-
     std::string playerMove = oldCoordinates.getRankFileIndex()
         + newCoordinates.getRankFileIndex();
 
@@ -300,7 +341,6 @@ void GameScreen::move(Coordinates oldCoords, Coordinates newCoords,
     chesspieceSprite[touchedByPlayer].setPosition(dest);
     chessgame.finishGame(moveType);
     std::cout << "Draw" << std::endl;
-
   }
 }
 
@@ -345,3 +385,32 @@ void GameScreen::reverseMove(sf::RenderWindow &App)
     }
   }
 }
+
+void GameScreen::setChessBoardFile(std::string file)
+{
+  chessBoardFile = file;
+  gameBoard_t.loadFromFile(chessBoardFile);
+  boardSprite.setTexture(gameBoard_t);
+  boardSprite.setPosition(g_pixel_dx, g_pixel_dy);
+}
+
+void GameScreen::rotateChesspieces() {
+
+  for (size_t i=0;i<32;i++){
+    chesspieceSprite[i].rotate((70));
+  }
+  gameBoard_t.loadFromFile("images/beach.jpg");
+  boardSprite.setTexture(gameBoard_t);
+  boardSprite.setPosition(g_pixel_dx, g_pixel_dy);
+}
+
+void GameScreen::stopRotatingChesspieces() {
+
+  for (size_t i=0;i<32;i++){
+    chesspieceSprite[i].setRotation(0);
+  }
+  gameBoard_t.loadFromFile(chessBoardFile);
+  boardSprite.setTexture(gameBoard_t);
+  boardSprite.setPosition(g_pixel_dx, g_pixel_dy);
+}
+

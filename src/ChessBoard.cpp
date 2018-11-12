@@ -518,7 +518,7 @@ bool ChessBoard::kingCanEscape(int* kingIndex, std::string COLOUR)
     if (attackedByKing != NULL) {
       std::string COLOUR = theKing->getColour();
       if (board[x][y].getChessPiece()->isValidCapture(
-                                  kingIndex[0], kingIndex[1], x, y, COLOUR)) {
+          kingIndex[0], kingIndex[1], x, y, attackedByKing->getColour())) {
         if (!isDefended(x, y, COLOUR)) {
           //reverse hypothetical move
           board[x][y].setChessPiece(attackedByKing);
