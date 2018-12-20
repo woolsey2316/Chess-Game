@@ -4,17 +4,19 @@ LayoutScreen::LayoutScreen(std::string fileName_)
 {
   fileName = fileName_;
   sf::RenderWindow window(sf::VideoMode(854, 444), "Set Layout");
+  background.setFillColor(sf::Color(255,255,255));
+  background.setSize(sf::Vector2f(854, 444));
 
   for (size_t i = 0; i < 4; ++i) {
     chessboard_t[i].loadFromFile("images/chessboard" + std::to_string(i) + ".png");
     chessboardSprite[i].setTexture(chessboard_t[i]);
     chessboardSprite[i].scale(0.15, 0.15);
-    chessboardSprite[i].setPosition(120*i, 10);
+    chessboardSprite[i].setPosition(120*i+10, 10);
 
-    rectangle[i].setSize(sf::Vector2f(0.15*600+10, 0.15*600+10));
+    rectangle[i].setSize(sf::Vector2f(0.15*550+5, 0.15*550+5));
     rectangle[i].setFillColor(sf::Color(200,200,200));
     rectangle[i].setSize(sf::Vector2f(100, 100));
-    rectangle[i].setPosition(120*i-5, 10-5);
+    rectangle[i].setPosition(120*i, 0);
 
   }
   Run(window);
@@ -36,10 +38,10 @@ std::string LayoutScreen::Run(sf::RenderWindow &window)
   	  	  break;
   	    }
   	    case sf::Event::MouseMoved: {
-  	      for (size_t i = 0; i < 4; ++i) {
+  	      for (size_t i = 0; i < rectangle.size(); ++i) {
             if (rectangle[i].getGlobalBounds().contains(mousePosF))
             {
-              rectangle[i].setFillColor(sf::Color(255, 255, 255));
+              rectangle[i].setFillColor(sf::Color(255, 0, 0));
             } else {
               rectangle[i].setFillColor(sf::Color(200, 200, 200));
             }
@@ -60,6 +62,7 @@ std::string LayoutScreen::Run(sf::RenderWindow &window)
       }
 
     }
+    window.draw(background);
     for (size_t i = 0; i < 4; ++i) {
       window.draw(rectangle[i]);
       window.draw(chessboardSprite[i]);
@@ -74,7 +77,7 @@ std::string LayoutScreen::getChosenImageFile() {
   return fileName;
 }
 
-std::string LayoutScreen::setChosenImageFile(std::string fileName_) {
+void LayoutScreen::setChosenImageFile(std::string fileName_) {
   if (fileName != "") {
     fileName = fileName_;
   }

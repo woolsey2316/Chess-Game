@@ -2,8 +2,8 @@
 const double g_chessboardWidth = 550;
 const double g_chessboardHeight = 550;
 const double g_squareSize = (int) 1.0*g_chessboardHeight/8;
-const int g_pixel_dx = 15;
-const int g_pixel_dy = 15;
+const float g_pixel_dx = 15.f;
+const float g_pixel_dy = 15.f;
 const std::string board_[8][8] = {
       {"black_rook","black_knight", "black_bishop", "black_queen", "black_king", "black_bishop","black_knight","black_rook"},
       {"black_pawn", "black_pawn" , "black_pawn"  , "black_pawn" , "black_pawn" ,  "black_pawn" , "black_pawn" ,"black_pawn"},

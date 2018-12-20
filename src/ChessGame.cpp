@@ -28,13 +28,6 @@ ChessGame::ChessGame(bool player2human)
   ChessBoard chessBoard;
 }
 
-ChessGame::ChessGame(std::string fileName)
-{
-  playerTurn = "WHITE";
-  player2Human = true;
-  ChessBoard chessBoard(std::string fileName);
-}
-
 void ChessGame::nextTurn()
 {
   playerTurn = (playerTurn  == "WHITE" ? "BLACK" : "WHITE");
@@ -149,4 +142,15 @@ void ChessGame::finishGame(MoveType result)
 bool ChessGame::hasFinished()
 {
   return hasEnded;
+}
+
+void ChessGame::setMoveNumber(int num) {
+  moveNumber = num;
+}
+
+void ChessGame::reset() {
+  entireMoveHistory = "";
+  chessBoard.reset();
+  setMoveNumber(0);
+  setTurnToWhite();
 }

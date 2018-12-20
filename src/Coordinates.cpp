@@ -3,8 +3,8 @@
 extern const int g_chessboardWidth;
 extern const int g_chessboardHeight;
 extern const double g_squareSize;
-extern const int g_pixel_dx;
-extern const int g_pixel_dy;
+extern const float g_pixel_dx;
+extern const float g_pixel_dy;
 
 Coordinates::Coordinates()
 {
@@ -19,15 +19,15 @@ Coordinates::Coordinates(std::string coords)
 
 sf::Vector2f Coordinates::getPixelCoords()
 {
-  return sf::Vector2f(integerCoords[0]*g_squareSize + g_pixel_dx + 0.0625*g_squareSize,
-                      integerCoords[1]*g_squareSize + g_pixel_dy + 0.125*g_squareSize);
+  return sf::Vector2f(integerCoords[0]*g_squareSize + (int) g_pixel_dx + 0.0625*g_squareSize,
+                      integerCoords[1]*g_squareSize + (int) g_pixel_dy + 0.125*g_squareSize);
 }
 
 sf::Vector2f Coordinates::RankFiletoPixelCoords(char a,char b)
 {
    int x = int(a) - 97;
    int y = 7 - int(b) + 49;
-   return sf::Vector2f(x*g_squareSize + g_pixel_dx,y*g_squareSize + g_pixel_dy);
+   return sf::Vector2f(x*g_squareSize + (int) g_pixel_dx,y*g_squareSize + (int) g_pixel_dy);
 }
 
 void Coordinates::setIntegerCoords(int x_pos, int y_pos)
@@ -43,8 +43,8 @@ int *Coordinates::getIntegerCoords()
 
 void Coordinates::setCoords(sf::Vector2f pixelCoords)
 {
-  integerCoords[0] = (pixelCoords.x - g_pixel_dx) / g_squareSize;
-  integerCoords[1] = (pixelCoords.y - g_pixel_dy) / g_squareSize;
+  integerCoords[0] = (pixelCoords.x - (int) g_pixel_dx) / g_squareSize;
+  integerCoords[1] = (pixelCoords.y - (int) g_pixel_dy) / g_squareSize;
 }
 
 void Coordinates::setCoords(std::string coords)

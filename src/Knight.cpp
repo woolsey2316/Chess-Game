@@ -1,6 +1,7 @@
 #include "Knight.h"
 #include "ChessPiece.h"
 #include <tuple>
+#include <iostream>
 
 Knight::Knight(std::string clr,std::string name)
   : ChessPiece(clr, name)
@@ -42,18 +43,18 @@ std::vector<std::array<int,2>> Knight::possibleMoves(int x_pos, int y_pos)
   int y_dest;
 
   for (int i = 0; i < 5; ++i) {
-    if (i == 0) {
+    x_step = 2 - i;
+    if (x_step == 0) {
       continue;
     }
-    x_step = 2 - i;
     x_dest = x_pos + x_step;
-    y_dest = abs(x_step) == 2 ?  y_pos + 2 : y_pos + 1;
+    y_dest = abs(x_step) == 2 ?  y_pos + 1 : y_pos + 2;
     if (validGridCoords(x_pos, y_pos, x_dest, y_dest)) {
       moveList.push_back(std::array<int, 2>{x_dest, y_dest});
     }
 
     x_dest = x_pos - x_step;
-    y_dest = abs(x_step) == 2 ?  y_pos - 2 : y_pos - 1;
+    y_dest = abs(x_step) == 2 ?  y_pos - 1 : y_pos - 2;
     if (validGridCoords(x_pos, y_pos, x_dest, y_dest)) {
       moveList.push_back(std::array<int, 2>{x_dest, y_dest});
     }

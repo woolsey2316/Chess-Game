@@ -14,13 +14,14 @@ class LayoutScreen
   LayoutScreen(std::string);
   std::string Run(sf::RenderWindow &window);
   std::string getChosenImageFile();
-  std::string setChosenImageFile(std::string fileName_);
+  void setChosenImageFile(std::string fileName_);
 
  private:
   std::array<sf::Texture, 4> chessboard_t;
   std::array<sf::Sprite, 4> chessboardSprite;
   sf::Vector2i mousePosition;
   std::array<sf::RectangleShape, 4> rectangle;
+  sf::RectangleShape background;
   bool buttonPressed = false;
   std::string fileName = "";
 };

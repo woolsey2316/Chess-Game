@@ -40,6 +40,7 @@ int MainScreen::Run(sf::RenderWindow &App)
 	Menu1.setCharacterSize(20);
 	Menu1.setString("New Game");
 	Menu1.setPosition({280.f, 160.f});
+	Menu1.setOutlineColor(sf::Color(0,0,0));
 
 	Menu2.setFont(Font);
 	Menu2.setCharacterSize(20);
@@ -74,29 +75,29 @@ int MainScreen::Run(sf::RenderWindow &App)
 			if (Event.type == sf::Event::MouseMoved)
 			{
 				if (Menu1.getGlobalBounds().contains(mousePosF)) {
-				  Menu1.setColor(sf::Color(250, 20, 20));
+				  Menu1.setFillColor(sf::Color(250, 20, 20));
 				} else {
-				  Menu1.setColor(sf::Color(250, 255, 255));
+				  Menu1.setFillColor(sf::Color(250, 255, 255));
 				}
 				if (Menu2.getGlobalBounds().contains(mousePosF)) {
-				  Menu2.setColor(sf::Color(250, 20, 20));
+				  Menu2.setFillColor(sf::Color(250, 20, 20));
 				} else {
-				  Menu2.setColor(sf::Color(250, 255, 255));
+				  Menu2.setFillColor(sf::Color(250, 255, 255));
 				}
 				if (Menu3.getGlobalBounds().contains(mousePosF)) {
-				  Menu3.setColor(sf::Color(250, 20, 20));
+				  Menu3.setFillColor(sf::Color(250, 20, 20));
 				} else {
-				  Menu3.setColor(sf::Color(250, 255, 255));
+				  Menu3.setFillColor(sf::Color(250, 255, 255));
 				}
 				if (Menu4.getGlobalBounds().contains(mousePosF)) {
-				  Menu4.setColor(sf::Color(250, 20, 20));
+				  Menu4.setFillColor(sf::Color(250, 20, 20));
 				} else {
-				  Menu4.setColor(sf::Color(250, 255, 255));
+				  Menu4.setFillColor(sf::Color(250, 255, 255));
 				}
         if (Menu5.getGlobalBounds().contains(mousePosF)) {
-				  Menu5.setColor(sf::Color(250, 20, 20));
+				  Menu5.setFillColor(sf::Color(250, 20, 20));
 				} else {
-				  Menu5.setColor(sf::Color(250, 255, 255));
+				  Menu5.setFillColor(sf::Color(250, 255, 255));
 				}
 			}
 			if (Event.type == sf::Event::MouseButtonPressed) {
@@ -117,7 +118,7 @@ int MainScreen::Run(sf::RenderWindow &App)
 				} else if (menu == 1) {
 				  return (2);
 				} else if (menu == 2) {
-          return (3);
+          return (1);
 				} else if (menu == 3) {
           return (3);
 				} else if (menu == 4) {
@@ -130,11 +131,10 @@ int MainScreen::Run(sf::RenderWindow &App)
 		}
 		Sprite.setColor(sf::Color(255, 255, 255, alpha / alpha_div));
 
-  //Clearing screen
   App.clear();
-  //Drawing
   App.draw(Sprite);
-  if (alpha == alpha_max)
+
+  if (alpha > alpha_max/5)
   {
     if (playing)
     {

@@ -28,12 +28,12 @@ class ChessGame {
   void saveGame();
   bool hasFinished();
   ChessGame(bool player2human, std::string difficulty_);
-  ChessGame(std::string fileName);
   ChessGame(bool player2human);
   ChessBoard getChessBoard();
   void loadSavedGame(std::string fileName);
   std::string getDifficulty();
   int getMoveNumber();
+  void setMoveNumber(int num);
 	void nextTurn();
 	void setTurnToWhite();
 	bool isHumanOpponent();
@@ -43,6 +43,7 @@ class ChessGame {
 	void setPlayer2Human(bool p2h);
 	Computer & getComputer();
 	void reverseMove();
+	void reset();
 };
 
 #endif

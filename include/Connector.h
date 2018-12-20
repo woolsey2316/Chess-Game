@@ -8,6 +8,7 @@
 #include <Computer.h>
 #include <vector>
 #include <array>
+#include <map>
 
 class Connector{
  private:
@@ -22,6 +23,6 @@ class Connector{
   void connectToEngine(char* path);
   void closeConnection();
   std::string getCompMove(std::string position, Computer comp);
-  std::vector<std::array<std::string, 2>> getScore(std::string position, Computer comp);
+  std::map<float,std::string, std::greater<float>> getScore(std::string position, Computer comp);
 };
 #endif

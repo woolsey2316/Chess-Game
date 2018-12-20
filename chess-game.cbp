@@ -67,6 +67,7 @@
 		<Unit filename="include/CheckMateScreen.h" />
 		<Unit filename="include/CheckStatus.h" />
 		<Unit filename="include/ChessBoard.h" />
+		<Unit filename="include/ChessBoardScreen.h" />
 		<Unit filename="include/ChessGame.h" />
 		<Unit filename="include/ChessPiece.h" />
 		<Unit filename="include/Computer.h" />
@@ -95,6 +96,7 @@
 		<Unit filename="src/CheckMateScreen.cpp" />
 		<Unit filename="src/CheckStatus.cpp" />
 		<Unit filename="src/ChessBoard.cpp" />
+		<Unit filename="src/ChessBoardScreen.cpp" />
 		<Unit filename="src/ChessGame.cpp" />
 		<Unit filename="src/ChessPiece.cpp" />
 		<Unit filename="src/Computer.cpp" />

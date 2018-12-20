@@ -100,15 +100,15 @@ int SettingsScreen::Run(sf::RenderWindow &App)
 		Sprite.setColor(sf::Color(255, 255, 255, alpha / alpha_div));
 		if (menu == 0)
 		{
-			Menu1.setColor(sf::Color(255, 0, 0, 255));
-			Menu2.setColor(sf::Color(255, 255, 255, 255));
-			Menu3.setColor(sf::Color(255, 0, 0, 255));
+			Menu1.setFillColor(sf::Color(255, 0, 0, 255));
+			Menu2.setFillColor(sf::Color(255, 255, 255, 255));
+			Menu3.setFillColor(sf::Color(255, 0, 0, 255));
 		}
 		else
 		{
-			Menu1.setColor(sf::Color(255, 255, 255, 255));
-			Menu2.setColor(sf::Color(255, 0, 0, 255));
-			Menu3.setColor(sf::Color(255, 255, 255, 255));
+			Menu1.setFillColor(sf::Color(255, 255, 255, 255));
+			Menu2.setFillColor(sf::Color(255, 0, 0, 255));
+			Menu3.setFillColor(sf::Color(255, 255, 255, 255));
 		}
 
 		//Clearing screen

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1541213259 source:c:\users\david\documents\programming\c++\chess-game\src\bishop.cpp
+1545232039 source:c:\users\david\documents\programming\c++\chess-game\src\bishop.cpp
 	"Bishop.h"
 	<cmath>
 	<tuple>
@@ -16,7 +16,7 @@
 
 1534875260 source:c:\users\david\documents\programming\c++\chess-game\src\checkstatus.cpp
 
-1541944541 source:c:\users\david\documents\programming\c++\chess-game\src\chessboard.cpp
+1545230947 source:c:\users\david\documents\programming\c++\chess-game\src\chessboard.cpp
 	"Pawn.h"
 	"ChessBoard.h"
 	"ChessPiece.h"
@@ -40,7 +40,7 @@
 	<string>
 	"ChessPiece.h"
 
-1541764432 c:\users\david\documents\programming\c++\chess-game\include\chessboard.h
+1545078861 c:\users\david\documents\programming\c++\chess-game\include\chessboard.h
 	<string>
 	<vector>
 	<memory>
@@ -83,7 +83,7 @@
 	<string>
 	"ChessPiece.h"
 
-1541778150 source:c:\users\david\documents\programming\c++\chess-game\src\chessgame.cpp
+1545235765 source:c:\users\david\documents\programming\c++\chess-game\src\chessgame.cpp
 	"ChessGame.h"
 	"ChessBoard.h"
 	<SFML/Graphics.hpp>
@@ -504,7 +504,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1541777933 c:\users\david\documents\programming\c++\chess-game\include\chessgame.h
+1545235770 c:\users\david\documents\programming\c++\chess-game\include\chessgame.h
 	"Player.h"
 	"ChessBoard.h"
 	"Computer.h"
@@ -516,13 +516,14 @@
 	<string>
 	"ChessPiece.h"
 
-1541850102 source:c:\users\david\documents\programming\c++\chess-game\src\connector.cpp
+1545225651 source:c:\users\david\documents\programming\c++\chess-game\src\connector.cpp
 	"Connector.h"
 	<string>
 	<iostream>
 	<sstream>
+	<map>
 
-1541827095 c:\users\david\documents\programming\c++\chess-game\include\connector.h
+1545201092 c:\users\david\documents\programming\c++\chess-game\include\connector.h
 	<windows.h>
 	<stdio.h>
 	<iostream>
@@ -530,8 +531,9 @@
 	<Computer.h>
 	<vector>
 	<array>
+	<map>
 
-1536345402 source:c:\users\david\documents\programming\c++\chess-game\src\coordinates.cpp
+1545075486 source:c:\users\david\documents\programming\c++\chess-game\src\coordinates.cpp
 	"Coordinates.h"
 
 1535502806 c:\users\david\documents\programming\c++\chess-game\include\coordinates.h
@@ -3965,23 +3967,24 @@
 	<boost/algorithm/string/finder.hpp>
 	<boost/algorithm/string/formatter.hpp>
 
-1536827885 source:c:\users\david\documents\programming\c++\chess-game\src\global.cpp
+1545060316 source:c:\users\david\documents\programming\c++\chess-game\src\global.cpp
 	"global.h"
 
-1536588296 c:\users\david\documents\programming\c++\chess-game\include\global.h
+1545060344 c:\users\david\documents\programming\c++\chess-game\include\global.h
 	<string>
 
-1541212266 source:c:\users\david\documents\programming\c++\chess-game\src\king.cpp
+1545088950 source:c:\users\david\documents\programming\c++\chess-game\src\king.cpp
 	<string>
 	"King.h"
 	"ChessPiece.h"
 	<vector>
 	<tuple>
 
-1541213353 source:c:\users\david\documents\programming\c++\chess-game\src\knight.cpp
+1545231545 source:c:\users\david\documents\programming\c++\chess-game\src\knight.cpp
 	"Knight.h"
 	"ChessPiece.h"
 	<tuple>
+	<iostream>
 
 1542015373 source:c:\users\david\documents\programming\c++\chess-game\src\main.cpp
 	<SFML/Graphics.hpp>
@@ -3994,7 +3997,7 @@
 1534881035 source:c:\users\david\documents\programming\c++\chess-game\src\movetype.cpp
 	"MoveType.h"
 
-1537121356 source:c:\users\david\documents\programming\c++\chess-game\src\pawn.cpp
+1545077063 source:c:\users\david\documents\programming\c++\chess-game\src\pawn.cpp
 	"ChessPiece.h"
 	"Pawn.h"
 	<cmath>
@@ -4013,13 +4016,14 @@
 	<nlohmann/json.hpp>
 	<string>
 
-1541213296 source:c:\users\david\documents\programming\c++\chess-game\src\queen.cpp
+1545231996 source:c:\users\david\documents\programming\c++\chess-game\src\queen.cpp
 	"Queen.h"
 	"ChessPiece.h"
 
-1541213271 source:c:\users\david\documents\programming\c++\chess-game\src\rook.cpp
+1545231926 source:c:\users\david\documents\programming\c++\chess-game\src\rook.cpp
 	"Rook.h"
 	"ChessPiece.h"
+	<iostream>
 
 1541166323 source:c:\users\david\documents\programming\c++\chess-game\src\square.cpp
 	<vector>
@@ -7436,7 +7440,7 @@
 	<boost/algorithm/string/finder.hpp>
 	<boost/algorithm/string/formatter.hpp>
 
-1541943412 source:c:\users\david\documents\programming\c++\chess-game\src\analysisscreen.cpp
+1545240535 source:c:\users\david\documents\programming\c++\chess-game\src\analysisscreen.cpp
 	"AnalysisScreen.h"
 	"CheckMateScreen.h"
 	"GameScreen.h"
@@ -7446,13 +7450,15 @@
 	<chrono>
 	<thread>
 	<iostream>
+	<map>
 
-1541864887 c:\users\david\documents\programming\c++\chess-game\include\analysisscreen.h
+1545239266 c:\users\david\documents\programming\c++\chess-game\include\analysisscreen.h
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
 	"MoveType.h"
 	"ChessBoard.h"
+	"ChessBoardScreen.h"
 	"Connector.h"
 	"Coordinates.h"
 	"ChessGame.h"
@@ -7467,7 +7473,7 @@
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
 
-1542022094 source:c:\users\david\documents\programming\c++\chess-game\src\gamescreen.cpp
+1545240508 source:c:\users\david\documents\programming\c++\chess-game\src\gamescreen.cpp
 	"GameScreen.h"
 	"global.h"
 	"CheckMateScreen.h"
@@ -7478,12 +7484,13 @@
 	<thread>
 	<iostream>
 
-1542020121 c:\users\david\documents\programming\c++\chess-game\include\gamescreen.h
+1545239918 c:\users\david\documents\programming\c++\chess-game\include\gamescreen.h
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
 	"MoveType.h"
 	"ChessBoard.h"
+	"ChessBoardScreen.h"
 	"Connector.h"
 	"Coordinates.h"
 	"ChessGame.h"
@@ -7503,7 +7510,7 @@
 	"cScreen.h"
 	<SFML/Graphics.hpp>
 
-1542012197 source:c:\users\david\documents\programming\c++\chess-game\src\mainscreen.cpp
+1545217055 source:c:\users\david\documents\programming\c++\chess-game\src\mainscreen.cpp
 	"MainScreen.h"
 
 1536757015 c:\users\david\documents\programming\c++\chess-game\include\mainscreen.h
@@ -7514,7 +7521,7 @@
 1537890135 source:c:\users\david\documents\programming\c++\chess-game\src\screens.cpp
 	"Screens.h"
 
-1536352553 source:c:\users\david\documents\programming\c++\chess-game\src\settingsscreen.cpp
+1545226651 source:c:\users\david\documents\programming\c++\chess-game\src\settingsscreen.cpp
 	"SettingsScreen.h"
 
 1540998465 source:c:\users\david\documents\programming\c++\chess-game\src\computer.cpp
@@ -7545,7 +7552,7 @@
 	<string>
 	"global.h"
 
-1541998830 source:c:\users\david\documents\programming\c++\chess-game\src\drillscreen.cpp
+1545240545 source:c:\users\david\documents\programming\c++\chess-game\src\drillscreen.cpp
 	"DrillScreen.h"
 	"CheckMateScreen.h"
 	"GameScreen.h"
@@ -7556,7 +7563,8 @@
 	<thread>
 	<iostream>
 
-1541943104 c:\users\david\documents\programming\c++\chess-game\include\drillscreen.h
+1545239250 c:\users\david\documents\programming\c++\chess-game\include\drillscreen.h
+	"ChessBoardScreen.h"
 	"MoveType.h"
 	"ChessBoard.h"
 	"Connector.h"
@@ -7844,13 +7852,36 @@
 
 1537438864 c:\libs\c++\nlohmann\detail\macro_unscope.hpp
 
-1542015693 source:c:\users\david\documents\programming\c++\chess-game\src\layoutscreen.cpp
+1545240197 source:c:\users\david\documents\programming\c++\chess-game\src\layoutscreen.cpp
 	"LayoutScreen.h"
 
-1542001809 c:\users\david\documents\programming\c++\chess-game\include\layoutscreen.h
+1545232650 c:\users\david\documents\programming\c++\chess-game\include\layoutscreen.h
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
 	<string>
 	"global.h"
+
+1545240526 source:c:\users\david\documents\programming\c++\chess-game\src\chessboardscreen.cpp
+	"ChessBoardScreen.h"
+	"CheckMateScreen.h"
+	"global.h"
+	<boost/algorithm/string.hpp>
+	<sstream>
+	<chrono>
+	<thread>
+	<iostream>
+	<map>
+	<map>
+	<map>
+
+1545239936 c:\users\david\documents\programming\c++\chess-game\include\chessboardscreen.h
+	"MoveType.h"
+	"ChessBoard.h"
+	"Connector.h"
+	"Coordinates.h"
+	"ChessGame.h"
+	"main.h"
+	"cScreen.h"
+	<map>
 

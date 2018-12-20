@@ -47,7 +47,7 @@ std::vector<std::array<int, 2>> King::possibleMoves(int x_pos, int y_pos)
       if (i == 0 && j == 0) {
         continue;
       }
-      if (validGridCoords(x_pos, y_pos, x_pos + i, y_pos + j))
+    if (validGridCoords(x_pos, y_pos, x_pos + i, y_pos + j))
       moveList.push_back(std::array<int, 2>{x_pos + i, y_pos + j});
     }
   }

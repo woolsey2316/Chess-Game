@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <map>
 
 void Connector::connectToEngine(char* path)
 {
@@ -26,12 +27,10 @@ std::string Connector::getCompMove(std::string position, Computer comp)
 {
 	std::string str;
 	position = "position startpos moves "+position
-      +"\ngo depth "+comp.getDepth()+"\n"
-      + "Skill Level "+comp.getSkillLevel()+"\n"
-      + "movetime "+comp.getMoveTime()+"\n";
+      + "\ngo depth "+comp.getDepth()+"\n";
 
 	WriteFile(pipin_w, position.c_str(), position.length(),&writ, NULL);
-    Sleep(100);
+    Sleep(200);
 
     PeekNamedPipe(pipout_r, buffer,sizeof(buffer), &read, &available, NULL);
     do
@@ -46,13 +45,13 @@ std::string Connector::getCompMove(std::string position, Computer comp)
     int n = str.find("bestmove");
 
     if (n!=-1) {
-      return str.substr(n+9,4);
+      return str.substr(n+9,5);
     }
 
     return "error";
 }
 
-std::vector<std::array<std::string, 2>> Connector::getScore(std::string position, Computer comp)
+std::map<float, std::string, std::greater<float>> Connector::getScore(std::string position, Computer comp)
 {
 	std::string str;
 	std::string messageToEngine;
@@ -62,7 +61,7 @@ std::vector<std::array<std::string, 2>> Connector::getScore(std::string position
       + "setoption name MultiPV value 5\n";
 
 	WriteFile(pipin_w, messageToEngine.c_str(), messageToEngine.length(),&writ, NULL);
-    Sleep(100);
+    Sleep(200);
 
     PeekNamedPipe(pipout_r, buffer,sizeof(buffer), &read, &available, NULL);
     do
@@ -73,41 +72,44 @@ std::vector<std::array<std::string, 2>> Connector::getScore(std::string position
 		str+=(char*)buffer;
     }
     while(read >= sizeof(buffer));
+    std::map<float, std::string, std::greater<float>> positions;
 
-    std::vector<std::array<std::string, 2>> positions;
-
-    size_t scoreIndex = str.find("score cp ", 0)+9;
-    size_t moveListIndex = str.find("multipv 1 pv ", 0);
+    int scoreIndex = str.find("score cp", 0)+9;
+    int moveListIndex = scoreIndex;
     int centipawns = 0;
-    size_t linenumber = 0;
-    size_t previousScoreIndex = 0;
+    int previousScoreIndex = 0;
     size_t endofLineIndex = 0;
 
-    //finding all possible move variations recommended by engine
+    //finding 1. centipawn score 2. the associated move variation recommended by engine
     while(scoreIndex > previousScoreIndex)
     {
-        moveListIndex = str.find(" pv ", moveListIndex+1)+4;
-        if (scoreIndex!=-1) {
-          std::string num = str.substr(scoreIndex,5);
-          if (num[0] == '-' || (num[0] >= '1' && num[0] <= '9')) {
-            for (int i = 0; i < 6; ++i) {
-              if (num[i] >= '1' && num[i] <= '9' ) {
-                if (num[0]== '-') {
-                    continue;
-                }
-
-              } else {
-              centipawns = std::stoi(num.substr(0,i-1));
-              break;
+      moveListIndex = str.find(" pv ", moveListIndex+1)+4;
+      if (scoreIndex!=-1) {
+        std::string num = str.substr(scoreIndex,6);
+          for (int i = 0; i < 6; ++i) {
+            if (i == 0) {
+              if (num[0]== '-') {
+                continue;
               }
+            } else if ((num[i] >= '0' && num[i] <= '9')) {
+              continue;
+            } else {
+              if (i > 0) {
+                centipawns = std::stoi(num.substr(0,i));
+              }
+              break;
             }
           }
         }
-        endofLineIndex = str.substr(moveListIndex,50).find("\n");
+        endofLineIndex = str.find("\r\n",moveListIndex);
+        std::string movelist = str.substr(moveListIndex,endofLineIndex-moveListIndex);
+        if (movelist.length()>29) {
+          movelist.replace(29,1,"\n              ");
+        }
+
         if (moveListIndex!=-1) {
-          positions.push_back(std::array<std::string,2>{
-            std::to_string(centipawns),
-            str.substr(moveListIndex,endofLineIndex)});
+          positions.insert(std::pair<float,std::string>{
+                           centipawns/100.f, movelist});
         }
         previousScoreIndex = scoreIndex;
         scoreIndex = str.find("score cp ", scoreIndex+1)+9;

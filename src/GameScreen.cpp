@@ -9,21 +9,13 @@
 #include <thread>
 #include <iostream>
 
-extern const double g_chessboardWidth;
-extern const double g_chessboardHeight;
-extern const double g_squareSize;
-extern const int g_pixel_dx;
-extern const int g_pixel_dy;
-extern const double g_chessPieceScale_y;
-extern const double g_chessPieceScale_x;
-
 GameScreen::GameScreen()
 {
   canReverseMoves = false;
   connector.connectToEngine((char *)"stockfish.exe");
-  chessgame.setPlayer2Human(false);
+  chessgame.setPlayer2Human(true);
   chessboard = chessgame.getChessBoard();
-  loadChessSprites();
+  loadScreen();
 }
 
 int GameScreen::Run(sf::RenderWindow &App)
@@ -42,11 +34,18 @@ int GameScreen::Run(sf::RenderWindow &App)
   	  	  break;
   	    }
   	    case sf::Event::LostFocus: {
-          rotateChesspieces();
+          break;
+  	    }
+        case sf::Event::TouchEnded: {
+          break;
+  	    }
+        case sf::Event::SensorChanged: {
+          break;
+  	    }
+        case sf::Event::Count: {
           break;
   	    }
   	    case sf::Event::GainedFocus: {
-          stopRotatingChesspieces();
           break;
   	    }
   	    case sf::Event::TextEntered: {
@@ -76,6 +75,20 @@ int GameScreen::Run(sf::RenderWindow &App)
           } else {
             mainMenu.setColor(sf::Color(0, 0, 0));
           }
+          if (retry.getGlobalBounds().contains(mousePosF))
+          {
+            retry.setColor(sf::Color(220, 220, 220));
+          } else {
+            retry.setColor(sf::Color(0, 0, 0));
+          }
+          for (size_t i = 0; i < rectangle.size(); ++i) {
+            if (rectangle[i].getGlobalBounds().contains(mousePosF))
+            {
+              rectangle[i].setFillColor(sf::Color(170, 170, 170));
+            } else {
+              rectangle[i].setFillColor(sf::Color(200, 200, 200));
+            }
+  	      }
           break;
   	    }
   	    case sf::Event::MouseButtonPressed : {
@@ -98,6 +111,10 @@ int GameScreen::Run(sf::RenderWindow &App)
           if (e.key.code == sf::Mouse::Left) {
             if (touchedByPlayer > -1 && !buttonPressed) {
               moveSprite(letGoOfPiece());
+            }
+            if (retry.getGlobalBounds().contains(mousePosF))
+            {
+              resetGame();
             }
             buttonPressed = false;
           }
@@ -125,6 +142,9 @@ void GameScreen::refreshDisplay(sf::RenderWindow &App) {
   App.draw(sidePanel);
   App.draw(boardSprite);
   App.draw(settings);
+  for (size_t i = 0; i < rectangle.size(); ++i) {
+      App.draw(rectangle[i]);
+  }
   App.draw(mainMenu);
   App.draw(retry);
   for (size_t i = 0; i < 32; ++i) {
@@ -133,284 +153,17 @@ void GameScreen::refreshDisplay(sf::RenderWindow &App) {
   App.display();
 }
 
-void GameScreen::computerMove()
-{
-  std::string compMove = connector.getCompMove(
-                  chessgame.getEntireMoveHistory(),
-                  comp);
-
-  if (compMove == "error") {
-    std::cout << "error" << std::endl;
-    return;
-  }
-  oldCoordinates.setCoords(compMove.substr(0,2));
-  newCoordinates.setCoords(compMove.substr(2,2));
-  moveType = chessboard.playerMove(chessgame.getTurn(),
-                                   oldCoordinates.getIntegerCoords()[1],
-                                   oldCoordinates.getIntegerCoords()[0],
-                                   newCoordinates.getIntegerCoords()[1],
-                                   newCoordinates.getIntegerCoords()[0]);
-  for (size_t i=0;i<32;i++){
-    if (chesspieceSprite[i].getGlobalBounds()
-        .contains(oldCoordinates.getPixelCoords())) {
-      touchedByComputer=i;
-    }
-  }
-  move(oldCoordinates, newCoordinates, moveType, touchedByComputer);
-  chessgame.updateEntireMoveHistory(compMove + " ");
-  chessgame.nextTurn();
-}
-
-void GameScreen::dragChessPiece()
-{
-  for(int i = 0; i < 32; ++i){
-    if (chesspieceSprite[i].getGlobalBounds().contains(mousePosition.x,
-                                                       mousePosition.y)) {
-      isPressed = true; touchedByPlayer = i;
-      dx = mousePosition.x - chesspieceSprite[i].getPosition().x;
-      dy = mousePosition.y - chesspieceSprite[i].getPosition().y;
-      oldPos = chesspieceSprite[i].getPosition();
-      oldCoordinates.setCoords(oldPos);
-    }
-  }
-
-  if (isPressed) {
-    chesspieceSprite[touchedByPlayer].setPosition(mousePosition.x-dx,
-                                                  mousePosition.y-dy);
-  }
-}
-
-MoveType GameScreen::letGoOfPiece()
-{
-    isPressed = false;
-    sf::Vector2f p = chesspieceSprite[touchedByPlayer].getPosition() +
-        sf::Vector2f(0.5*g_squareSize, 0.5*g_squareSize);
-    newCoordinates.setCoords(p);
-    newPos = newCoordinates.getPixelCoords();
-
-    int* dest = newCoordinates.getIntegerCoords();
-    int* start = oldCoordinates.getIntegerCoords();
-
-    return chessboard.playerMove(chessgame.getTurn(),
-                                 start[1], start[0], dest[1], dest[0]);
-
-}
-
-void GameScreen::moveSprite(MoveType moveType)
-{
-  if (moveType == MoveType::Invalid) {
-    chesspieceSprite[touchedByPlayer].setPosition(sf::Vector2f(oldPos.x,oldPos.y));
-  } else {
-    chessgame.updateEntireMoveHistory(oldCoordinates.getRankFileIndex()
-                                      + newCoordinates.getRankFileIndex()
-                                      + " ");
-    std::cout << oldCoordinates.getRankFileIndex()
-        + newCoordinates.getRankFileIndex() + " " << std::endl;
-    move(oldCoordinates, newCoordinates, moveType, touchedByPlayer);
-    chessgame.nextTurn();
-    oldPos = newPos;
-  }
-}
-
-void GameScreen::loadChessSprites()
+void GameScreen::loadScreen()
 {
   sidePanel_t.loadFromFile("images/sidePanelGame.png");
   sidePanel.setTexture(sidePanel_t);
   sidePanel.setPosition({600.f, g_pixel_dy});
-  background_t.loadFromFile("images/wood-background.jpg");
-  background.setTexture(background_t);
-
-  gameBoard_t.loadFromFile(chessBoardFile);
-  boardSprite.setTexture(gameBoard_t);
-  boardSprite.setPosition(g_pixel_dx, g_pixel_dy);
-  boardSprite.scale(g_chessboardWidth/gameBoard_t.getSize().x,
-    g_chessboardWidth/gameBoard_t.getSize().x);
 
   settings_t.loadFromFile("images/settings.png");
   settings.setTexture(settings_t);
   settings.setPosition({605, g_pixel_dy + 10});
 
-  retry_t.loadFromFile("images/retry.png");
-  retry.setTexture(retry_t);
-  retry.setPosition({605, g_pixel_dy + 520});
-
-  mainMenu_t.loadFromFile("images/main_menu.png");
-  mainMenu.setTexture(mainMenu_t);
-  mainMenu.setPosition({860, g_pixel_dy + 10});
-
-  size_t index=0;
-  for(size_t i=0;i<8;++i) {
-    for (size_t j=0;j<8;++j) {
-      if (board_[i][j] == "empty") {
-        continue;
-      }
-      texture[index].loadFromFile("images/" + board_[i][j] + ".png");
-
-      chesspieceSprite[index].setTexture(texture[index]);
-      chesspieceSprite[index].setPosition(g_squareSize*j + 0.0625*g_squareSize + g_pixel_dx,
-                                          g_squareSize*i + 0.125*g_squareSize + g_pixel_dy);
-      index++;
-    }
-  }
+  loadChessSprites();
 }
 
-void GameScreen::move(Coordinates oldCoords, Coordinates newCoords,
-                   MoveType moveType, int touchedByPlayer)
-{
-  sf::Vector2f start = oldCoords.getPixelCoords();
-  sf::Vector2f dest = newCoords.getPixelCoords();
-
-  if (moveType == MoveType::Capture || moveType == MoveType::EmptySquare) {
-
-    for(int i=0;i<chesspieceSprite.size();i++) {
-      if (chesspieceSprite[i].getPosition() == dest) {
-        chesspieceSprite[i].setPosition(-100,-100);
-      }
-    }
-
-    chesspieceSprite[touchedByPlayer].setPosition(dest);
-
-  } else if (moveType == MoveType::Promotion) {
-
-    for(int i=0;i<chesspieceSprite.size();i++) {
-      if (chesspieceSprite[i].getPosition() == dest) {
-        chesspieceSprite[i].setPosition(-100,-100);
-      }
-    }
-
-    promotePawn(touchedByPlayer, dest);
-
-  } else if (moveType == MoveType::enPassant) {
-
-    for(int i=0;i<chesspieceSprite.size();i++) {
-      if ((chesspieceSprite[i].getPosition().x == dest.x)
-          & (chesspieceSprite[i].getPosition().y == start.y)) {
-        chesspieceSprite[i].setPosition(-100,-100);
-      }
-    }
-
-    chesspieceSprite[touchedByPlayer].setPosition(dest);
-
-  } else if (moveType == MoveType::Castle) {
-
-    for(int i=0;i<chesspieceSprite.size();i++) {
-      if (chesspieceSprite[i].getPosition() == start) {
-        touchedByPlayer = i;
-      }
-    }
-    chesspieceSprite[touchedByPlayer].setPosition(dest);
-
-    std::string playerMove = oldCoordinates.getRankFileIndex()
-        + newCoordinates.getRankFileIndex();
-
-    if (playerMove=="e1g1") {
-      oldCoordinates.setCoords("h1");
-      newCoordinates.setCoords("f1");
-      move(oldCoordinates, newCoordinates, moveType, touchedByPlayer);
-    } else if (playerMove=="e8g8") {
-      oldCoordinates.setCoords("h8");
-      newCoordinates.setCoords("f8");
-      move(oldCoordinates, newCoordinates, moveType, touchedByPlayer);
-    } else if (playerMove=="e1c1") {
-      oldCoordinates.setCoords("a1");
-      newCoordinates.setCoords("d1");
-      move(oldCoordinates, newCoordinates, moveType, touchedByPlayer);
-    } else if (playerMove=="e8c8") {
-      oldCoordinates.setCoords("a8");
-      newCoordinates.setCoords("d8");
-      move(oldCoordinates, newCoordinates, moveType, touchedByPlayer);
-    }
-
-  } else if (moveType == MoveType::CheckMate) {
-
-    for(int i=0;i<chesspieceSprite.size();i++) {
-      if (chesspieceSprite[i].getPosition() == dest) {
-        chesspieceSprite[i].setPosition(-100,-100);
-      }
-    }
-    CheckMateScreen CheckMateScreen;
-    chesspieceSprite[touchedByPlayer].setPosition(dest);
-    chessgame.finishGame(moveType);
-
-  } else if (moveType == MoveType::StaleMate || moveType == MoveType::Draw) {
-    for(int i=0;i<chesspieceSprite.size();i++) {
-      if (chesspieceSprite[i].getPosition() == dest) {
-        chesspieceSprite[i].setPosition(-100,-100);
-      }
-    }
-    chesspieceSprite[touchedByPlayer].setPosition(dest);
-    chessgame.finishGame(moveType);
-    std::cout << "Draw" << std::endl;
-  }
-}
-
-void GameScreen::promotePawn(int index, sf::Vector2f dest)
-{
-  texture[index].loadFromFile("images/"
-      + boost::algorithm::to_lower_copy(chessboard.getPromotingColour())
-      + "_"
-      + boost::algorithm::to_lower_copy(chessboard.getPromotingPiece())
-      + ".png");
-  chesspieceSprite[index].setTexture(texture[index]);
-  chesspieceSprite[index].setPosition(dest);
-}
-
-void GameScreen::reverseMove(sf::RenderWindow &App)
-{
-  if (!isPressed) {
-    chessgame.reverseMove();
-    chessboard.reset();
-    chessgame.setTurnToWhite();
-    loadChessSprites();
-
-    std::string moves = chessgame.getEntireMoveHistory();
-    for(int i=0;i<moves.length();i+=5) {
-      std::string coords = moves.substr(i,4);
-      oldCoordinates.setCoords(coords.substr(0,2));
-      newCoordinates.setCoords(coords.substr(2,2));
-      moveType = chessboard.playerMove(chessgame.getTurn(),
-                                     oldCoordinates.getIntegerCoords()[1],
-                                     oldCoordinates.getIntegerCoords()[0],
-                                     newCoordinates.getIntegerCoords()[1],
-                                     newCoordinates.getIntegerCoords()[0]);
-      for (int i=0;i<32;i++){
-        if (chesspieceSprite[i].getGlobalBounds()
-            .contains(oldCoordinates.getPixelCoords())) {
-          touchedByComputer=i;
-        }
-      }
-      move(oldCoordinates, newCoordinates, moveType, touchedByComputer);
-      chessgame.nextTurn();
-      refreshDisplay(App);
-    }
-  }
-}
-
-void GameScreen::setChessBoardFile(std::string file)
-{
-  chessBoardFile = file;
-  gameBoard_t.loadFromFile(chessBoardFile);
-  boardSprite.setTexture(gameBoard_t);
-  boardSprite.setPosition(g_pixel_dx, g_pixel_dy);
-}
-
-void GameScreen::rotateChesspieces() {
-
-  for (size_t i=0;i<32;i++){
-    chesspieceSprite[i].rotate((70));
-  }
-  gameBoard_t.loadFromFile("images/beach.jpg");
-  boardSprite.setTexture(gameBoard_t);
-  boardSprite.setPosition(g_pixel_dx, g_pixel_dy);
-}
-
-void GameScreen::stopRotatingChesspieces() {
-
-  for (size_t i=0;i<32;i++){
-    chesspieceSprite[i].setRotation(0);
-  }
-  gameBoard_t.loadFromFile(chessBoardFile);
-  boardSprite.setTexture(gameBoard_t);
-  boardSprite.setPosition(g_pixel_dx, g_pixel_dy);
-}
 
