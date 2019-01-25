@@ -84,9 +84,9 @@ int GameScreen::Run(sf::RenderWindow &App)
           for (size_t i = 0; i < rectangle.size(); ++i) {
             if (rectangle[i].getGlobalBounds().contains(mousePosF))
             {
-              rectangle[i].setFillColor(sf::Color(170, 170, 170));
+              rectangle[i].setFillColor(sf::Color(220, 220, 220));
             } else {
-              rectangle[i].setFillColor(sf::Color(200, 200, 200));
+              rectangle[i].setFillColor(sf::Color(241, 241, 241));
             }
   	      }
           break;
@@ -161,7 +161,7 @@ void GameScreen::loadScreen()
 
   settings_t.loadFromFile("images/settings.png");
   settings.setTexture(settings_t);
-  settings.setPosition({605, g_pixel_dy + 10});
+  settings.setPosition({605, g_pixel_dy + 5});
 
   loadChessSprites();
 }

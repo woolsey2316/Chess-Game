@@ -3,5 +3,5 @@
     "numberOfDefeats": 0,
     "numberOfDraws": 0,
     "numberOfWins": 0,
-    "rating": 1446
+    "rating": 1190
 }

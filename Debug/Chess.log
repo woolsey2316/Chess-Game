@@ -1,0 +1,82 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: Two or more files with the name of main.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are main.cpp, src\main.cpp.
+  main.cpp
+c:\users\david\documents\programming\c++\chess-game\main.cpp(1): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  AnalysisScreen.cpp
+c:\users\david\documents\programming\c++\chess-game\src\analysisscreen.cpp(1): fatal error C1083: Cannot open include file: 'AnalysisScreen.h': No such file or directory
+  Bishop.cpp
+c:\users\david\documents\programming\c++\chess-game\src\bishop.cpp(1): fatal error C1083: Cannot open include file: 'Bishop.h': No such file or directory
+  CheckMateScreen.cpp
+c:\users\david\documents\programming\c++\chess-game\src\checkmatescreen.cpp(1): fatal error C1083: Cannot open include file: 'CheckMateScreen.h': No such file or directory
+  CheckStatus.cpp
+  ChessBoard.cpp
+c:\users\david\documents\programming\c++\chess-game\src\chessboard.cpp(1): fatal error C1083: Cannot open include file: 'Pawn.h': No such file or directory
+  ChessBoardScreen.cpp
+c:\users\david\documents\programming\c++\chess-game\src\chessboardscreen.cpp(1): fatal error C1083: Cannot open include file: 'ChessBoardScreen.h': No such file or directory
+  ChessGame.cpp
+c:\users\david\documents\programming\c++\chess-game\src\chessgame.cpp(1): fatal error C1083: Cannot open include file: 'ChessGame.h': No such file or directory
+  ChessPiece.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\crtdefs.h(10): fatal error C1083: Cannot open include file: 'corecrt.h': No such file or directory
+  ChessScreen.cpp
+c:\users\david\documents\programming\c++\chess-game\src\chessscreen.cpp(1): fatal error C1083: Cannot open include file: 'ChessScreen.h': No such file or directory
+  Computer.cpp
+c:\users\david\documents\programming\c++\chess-game\src\computer.cpp(1): fatal error C1083: Cannot open include file: 'Computer.h': No such file or directory
+  Connector.cpp
+c:\users\david\documents\programming\c++\chess-game\src\connector.cpp(1): fatal error C1083: Cannot open include file: 'Connector.h': No such file or directory
+  Coordinates.cpp
+c:\users\david\documents\programming\c++\chess-game\src\coordinates.cpp(1): fatal error C1083: Cannot open include file: 'Coordinates.h': No such file or directory
+  cScreen.cpp
+c:\users\david\documents\programming\c++\chess-game\src\cscreen.cpp(1): fatal error C1083: Cannot open include file: 'cScreen.h': No such file or directory
+  Display.cpp
+c:\users\david\documents\programming\c++\chess-game\src\display.cpp(1): fatal error C1083: Cannot open include file: 'Display.h': No such file or directory
+  DrillScreen.cpp
+c:\users\david\documents\programming\c++\chess-game\src\drillscreen.cpp(1): fatal error C1083: Cannot open include file: 'DrillScreen.h': No such file or directory
+  GameScreen.cpp
+c:\users\david\documents\programming\c++\chess-game\src\gamescreen.cpp(1): fatal error C1083: Cannot open include file: 'GameScreen.h': No such file or directory
+  global.cpp
+c:\users\david\documents\programming\c++\chess-game\src\global.cpp(1): fatal error C1083: Cannot open include file: 'global.h': No such file or directory
+  King.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\crtdefs.h(10): fatal error C1083: Cannot open include file: 'corecrt.h': No such file or directory
+  Knight.cpp
+c:\users\david\documents\programming\c++\chess-game\src\knight.cpp(1): fatal error C1083: Cannot open include file: 'Knight.h': No such file or directory
+  Generating Code...
+  Compiling...
+  LayoutScreen.cpp
+c:\users\david\documents\programming\c++\chess-game\src\layoutscreen.cpp(1): fatal error C1083: Cannot open include file: 'LayoutScreen.h': No such file or directory
+  main.cpp
+c:\users\david\documents\programming\c++\chess-game\src\main.cpp(1): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  MainScreen.cpp
+c:\users\david\documents\programming\c++\chess-game\src\mainscreen.cpp(1): fatal error C1083: Cannot open include file: 'MainScreen.h': No such file or directory
+  Matrix.cpp
+c:\users\david\documents\programming\c++\chess-game\src\matrix.cpp(11): error C2039: 'vector': is not a member of 'std'
+  c:\users\david\documents\programming\c++\chess-game\predefined c++ types (compiler internal)(256): note: see declaration of 'std'
+c:\users\david\documents\programming\c++\chess-game\src\matrix.cpp(11): error C2143: syntax error: missing ';' before '<'
+c:\users\david\documents\programming\c++\chess-game\src\matrix.cpp(11): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\david\documents\programming\c++\chess-game\src\matrix.cpp(11): error C2238: unexpected token(s) preceding ';'
+c:\users\david\documents\programming\c++\chess-game\src\matrix.cpp(17): error C2614: 'Matrix': illegal member initialization: 'mData' is not a base or member
+c:\users\david\documents\programming\c++\chess-game\src\matrix.cpp(23): error C2065: 'mData': undeclared identifier
+c:\users\david\documents\programming\c++\chess-game\src\matrix.cpp(28): error C2065: 'mData': undeclared identifier
+  MoveEvaluator.cpp
+c:\users\david\documents\programming\c++\chess-game\src\moveevaluator.cpp(1): fatal error C1083: Cannot open include file: 'MoveEvaluator.h': No such file or directory
+  MoveType.cpp
+c:\users\david\documents\programming\c++\chess-game\src\movetype.cpp(1): fatal error C1083: Cannot open include file: 'MoveType.h': No such file or directory
+  NetworkConnection.cpp
+c:\users\david\documents\programming\c++\chess-game\src\networkconnection.cpp(1): fatal error C1083: Cannot open include file: 'NetworkConnection.h': No such file or directory
+  Pawn.cpp
+c:\users\david\documents\programming\c++\chess-game\src\pawn.cpp(1): fatal error C1083: Cannot open include file: 'ChessPiece.h': No such file or directory
+  Player.cpp
+c:\users\david\documents\programming\c++\chess-game\src\player.cpp(1): fatal error C1083: Cannot open include file: 'Player.h': No such file or directory
+  PromotionScreen.cpp
+c:\users\david\documents\programming\c++\chess-game\src\promotionscreen.cpp(1): fatal error C1083: Cannot open include file: 'PromotionScreen.h': No such file or directory
+  Queen.cpp
+c:\users\david\documents\programming\c++\chess-game\src\queen.cpp(1): fatal error C1083: Cannot open include file: 'Queen.h': No such file or directory
+  Result.cpp
+c:\users\david\documents\programming\c++\chess-game\src\result.cpp(1): fatal error C1083: Cannot open include file: 'Result.h': No such file or directory
+  Rook.cpp
+c:\users\david\documents\programming\c++\chess-game\src\rook.cpp(1): fatal error C1083: Cannot open include file: 'Rook.h': No such file or directory
+  Screens.cpp
+c:\users\david\documents\programming\c++\chess-game\src\screens.cpp(1): fatal error C1083: Cannot open include file: 'Screens.h': No such file or directory
+  SettingsScreen.cpp
+c:\users\david\documents\programming\c++\chess-game\src\settingsscreen.cpp(1): fatal error C1083: Cannot open include file: 'SettingsScreen.h': No such file or directory
+  Square.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\crtdefs.h(10): fatal error C1083: Cannot open include file: 'corecrt.h': No such file or directory
+  Generating Code...

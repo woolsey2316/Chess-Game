@@ -17,7 +17,6 @@ class Coordinates {
   sf::Vector2f RankFiletoPixelCoords(char a, char b);
   std::string toRankFileIndex(sf::Vector2f p);
   int *RankFiletoInteger(std::string chessMove);
-  toIntegerCoords(int x_pos, int y_pos);
 
   std::string getRankFileIndex();
   int *getIntegerCoords();

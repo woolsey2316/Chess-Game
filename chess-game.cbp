@@ -49,8 +49,6 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-Wall" />
-			<Add option="-fexceptions" />
 			<Add directory="C:/CodeBlocks/sfml/include" />
 			<Add directory="C:/Libs/c++" />
 		</Compiler>

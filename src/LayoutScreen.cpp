@@ -41,7 +41,7 @@ std::string LayoutScreen::Run(sf::RenderWindow &window)
   	      for (size_t i = 0; i < rectangle.size(); ++i) {
             if (rectangle[i].getGlobalBounds().contains(mousePosF))
             {
-              rectangle[i].setFillColor(sf::Color(255, 0, 0));
+              rectangle[i].setFillColor(sf::Color(190, 190, 190));
             } else {
               rectangle[i].setFillColor(sf::Color(200, 200, 200));
             }

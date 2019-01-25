@@ -144,12 +144,12 @@ void ChessBoardScreen::loadChessSprites()
 
   retry_t.loadFromFile("images/retry.png");
   retry.setTexture(retry_t);
-  retry.setPosition({800, g_pixel_dy + 12});
+  retry.setPosition({822, g_pixel_dy + 12});
 
   for (size_t i = 0; i < rectangle.size(); ++i) {
     rectangle[i].setFillColor(sf::Color(200,200,200));
     rectangle[i].setSize(sf::Vector2f(40, 40));
-    rectangle[i].setPosition(795+i*60, g_pixel_dy + 5);
+    rectangle[i].setPosition(815+i*40, g_pixel_dy + 5);
   }
 
   int index=0;
