@@ -13,9 +13,9 @@ bool Queen::isValidMove(int x, int y, int dest_x, int dest_y)
   //diagonal movement
   ((abs(dest_x - x) == abs(dest_y - y)) ||
     //vertical movement
-    ((dest_y - y) == 0) & (abs(dest_x - x) > 0) ||
+    (((dest_y - y) == 0) & (abs(dest_x - x) > 0)) ||
       //horizontal movement
-      ((dest_x - x) == 0) & (abs(dest_y - y) > 0))
+      (((dest_x - x) == 0) & (abs(dest_y - y) > 0)))
         &&!(dest_x == x && dest_y == y);
 }
 
@@ -23,11 +23,12 @@ bool Queen::isValidMove(int x, int y, int dest_x,int dest_y,bool isCapturing)
 {
   return
   //diagonal movement
-  (abs(dest_x - x) == abs(dest_y - y)) ||
+  ((abs(dest_x - x) == abs(dest_y - y)) ||
     //non-zero vertical movement
-    ((dest_y - y) == 0 ) & (abs(dest_x - x) > 0) ||
+    (((dest_y - y) == 0 ) & (abs(dest_x - x) > 0)) ||
       //non-zero horizontal movement
-      ((dest_x - x) == 0) & (abs(dest_y - y) > 0);
+      (((dest_x - x) == 0) & (abs(dest_y - y) > 0)))
+        &&!(dest_x == x && dest_y == y);
 }
 
 bool Queen::isValidEnPassant(int start_x, int start_y, int dest_x, int dest_y, std::string pieceType, int* recentMove)

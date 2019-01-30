@@ -175,19 +175,17 @@ bool ChessBoard::isPinnedToKing(int x_pos, int y_pos,std::array<size_t,2> kingIn
 
   //searching for a pinning piece
   while (x_pos < 7 && x_pos > 0 && y_pos < 7 && y_pos > 0) {
-    x_pos -= x_step;
-    y_pos -= y_step;
+    x_pos += x_step;
+    y_pos += y_step;
     if (board[x_pos][y_pos].isOccupied()) {
       //a piece between threat and king exists because otherwise board in check
       if (!isPathBlocked(x_pos, y_pos, x, y)) {
         if (board[x_pos][y_pos].getChessPiece()->getType() != "PAWN" &&
             board[x_pos][y_pos].getChessPiece()->getType() != "KNIGHT") {
           if (board[x_pos][y_pos].getChessPiece()->isDefending(x_pos, y_pos, x, y,
-                                                board[x_pos][y_pos].getChessPiece()->getColour())) {
+                                                board[x][y].getChessPiece()->getColour())) {
             return true;
           }
-          //first piece found is the only pinning piece
-          return false;
         }
       }
     }
@@ -367,7 +365,7 @@ CheckStatus ChessBoard::determineCheckStatus(std::string COLOUR, bool opponentKi
         for (int y_pos=0;y_pos<8;++y_pos) {
           if (board[x_pos][y_pos].isOccupied() &&
               board[x_pos][y_pos].getChessPiece()->getColour() == COLOUR) {
-            if (canBlockThreat(x_pos, y_pos, checkThreat, kingIndex) || canCaptureThreat(x_pos, y_pos, checkThreat)) {
+            if (canBlockThreat(x_pos, y_pos, checkThreat, kingIndex) || canCaptureThreat(x_pos, y_pos, checkThreat, kingIndex)) {
               return CheckStatus::Check;
             }
           }
@@ -531,7 +529,8 @@ bool ChessBoard::canBlockThreat(int x_pos, int y_pos,
                 && !(((y_dest > kingIndex[1]) && (y_dest > checkThreat[1]))
                 || ((y_dest < kingIndex[1]) && (y_dest < checkThreat[1])))
                 && abs(x_dest - kingIndex[0]) == abs(y_dest - kingIndex[1])
-                && abs(x_dest - checkThreat[0]) == abs(y_dest - checkThreat[1]))  {
+                && abs(x_dest - checkThreat[0]) == abs(y_dest - checkThreat[1])
+                && (abs(x_dest - kingIndex[0]) > 0)) {
                 return true;
                 }
           }
@@ -544,7 +543,9 @@ bool ChessBoard::canBlockThreat(int x_pos, int y_pos,
 }
 
 bool ChessBoard::canCaptureThreat(int x_pos, int y_pos,
-                                  std::array<size_t,2> checkThreat) {
+                                  std::array<size_t,2> checkThreat,
+                                  std::array<size_t,2> kingIndex)
+{
   if (board[x_pos][y_pos].getChessPiece()->getType() != "KING") {
     std::string COLOUR = board[checkThreat[0]][checkThreat[1]].getChessPiece()->getColour();
     std::string PIECE_TYPE = board[checkThreat[0]][checkThreat[1]].getChessPiece()->getColour();
@@ -555,11 +556,14 @@ bool ChessBoard::canCaptureThreat(int x_pos, int y_pos,
         return true;
       }
     }
-
-    return (board[x_pos][y_pos].getChessPiece()->isValidCapture(
-        x_pos, y_pos, checkThreat[0], checkThreat[1], COLOUR));
+    if (!isPathBlocked(x_pos, y_pos, checkThreat[0], checkThreat[1])) {
+        if (!isPinnedToKing(x_pos, y_pos, kingIndex)) {
+          return (board[x_pos][y_pos].getChessPiece()->isValidCapture(
+              x_pos, y_pos, checkThreat[0], checkThreat[1], COLOUR));
+        }
   }
   return false;
+  }
 }
 
 bool ChessBoard::kingCanEscape(std::array<size_t,2> kingIndex,

@@ -7,9 +7,6 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
-#include <map>
-#include <map>
-#include <map>
 
 extern const double g_chessboardWidth;
 extern const double g_chessboardHeight;
@@ -96,7 +93,6 @@ void ChessBoardScreen::getPositionScores() {
     }
 }
 
-
 MoveType ChessBoardScreen::letGoOfPiece()
 {
     isPressed = false;
@@ -109,7 +105,6 @@ MoveType ChessBoardScreen::letGoOfPiece()
     int* start = oldCoordinates.getIntegerCoords();
     return chessboard.playerMove(chessgame.getTurn(),
                                  start[1], start[0], dest[1], dest[0], ' ');
-
 
 }
 
@@ -168,20 +163,65 @@ void ChessBoardScreen::loadChessSprites()
   }
 }
 
+void ChessBoardScreen::loadSounds()
+{
+    if (!checkMateSound_buffer.loadFromFile("sounds/CheckMateSound.wav")) {
+        soundNotFound = true;
+    }
+
+    if (!checkSound_buffer.loadFromFile("sounds/CheckSound.wav")) {
+        soundNotFound = true;
+    }
+
+    if (!normalMove_buffer.loadFromFile("sounds/NormalMove.wav")) {
+        soundNotFound = true;
+    }
+
+    if (!wooshSound_buffer.loadFromFile("sounds/Woosh.flac")) {
+        soundNotFound = true;
+    }
+
+    if (!captureSound_buffer.loadFromFile("sounds/CaptureSound.wav")) {
+        soundNotFound = true;
+    }
+
+    if (!soundNotFound) {
+      checkMateSound.setBuffer(checkMateSound_buffer);
+      checkSound.setBuffer(checkSound_buffer);
+      normalMoveSound.setBuffer(normalMove_buffer);
+      wooshSound.setBuffer(wooshSound_buffer);
+      captureSound.setBuffer(captureSound_buffer);
+    }
+}
+
 void ChessBoardScreen::move(Coordinates oldCoords, Coordinates newCoords,
                    MoveType moveType, int touchedByPlayer)
 {
   sf::Vector2f start = oldCoords.getPixelCoords();
   sf::Vector2f dest = newCoords.getPixelCoords();
 
-  if (moveType == MoveType::Capture || moveType == MoveType::EmptySquare) {
+  if (moveType == MoveType::Capture) {
 
     for(size_t i=0;i<chesspieceSprite.size();i++) {
       if (chesspieceSprite[i].getPosition() == dest) {
         chesspieceSprite[i].setPosition(-100,-100);
       }
     }
+    if (!soundNotFound) {
+      captureSound.play();
+    }
+    chesspieceSprite[touchedByPlayer].setPosition(dest);
 
+  } else if (moveType == MoveType::EmptySquare) {
+
+    for(size_t i=0;i<chesspieceSprite.size();i++) {
+      if (chesspieceSprite[i].getPosition() == dest) {
+        chesspieceSprite[i].setPosition(-100,-100);
+      }
+    }
+    if (!soundNotFound) {
+      normalMoveSound.play();
+    }
     chesspieceSprite[touchedByPlayer].setPosition(dest);
 
   } else if (moveType == MoveType::Promotion) {
@@ -191,7 +231,9 @@ void ChessBoardScreen::move(Coordinates oldCoords, Coordinates newCoords,
         chesspieceSprite[i].setPosition(-100,-100);
       }
     }
-
+    if (!soundNotFound) {
+      wooshSound.play();
+    }
     promotePawn(touchedByPlayer, dest);
 
   } else if (moveType == MoveType::enPassant) {
@@ -202,7 +244,9 @@ void ChessBoardScreen::move(Coordinates oldCoords, Coordinates newCoords,
         chesspieceSprite[i].setPosition(-100,-100);
       }
     }
-
+    if (!soundNotFound) {
+      captureSound.play();
+    }
     chesspieceSprite[touchedByPlayer].setPosition(dest);
 
   } else if (moveType == MoveType::Castle) {
@@ -211,6 +255,9 @@ void ChessBoardScreen::move(Coordinates oldCoords, Coordinates newCoords,
       if (chesspieceSprite[i].getPosition() == start) {
         touchedByPlayer = i;
       }
+    }
+    if (!soundNotFound) {
+      wooshSound.play();
     }
     chesspieceSprite[touchedByPlayer].setPosition(dest);
 
@@ -242,6 +289,9 @@ void ChessBoardScreen::move(Coordinates oldCoords, Coordinates newCoords,
         chesspieceSprite[i].setPosition(-100,-100);
       }
     }
+    if (!soundNotFound) {
+      checkMateSound.play();
+    }
     CheckMateScreen checkMateScreen;
     chesspieceSprite[touchedByPlayer].setPosition(dest);
     chessgame.finishGame(moveType);
@@ -251,6 +301,9 @@ void ChessBoardScreen::move(Coordinates oldCoords, Coordinates newCoords,
       if (chesspieceSprite[i].getPosition() == dest) {
         chesspieceSprite[i].setPosition(-100,-100);
       }
+    }
+    if (!soundNotFound) {
+      normalMoveSound.play();
     }
     chesspieceSprite[touchedByPlayer].setPosition(dest);
     chessgame.finishGame(moveType);

@@ -14,6 +14,7 @@ class ChessBoardScreen : public cScreen
 {
  public:
   void loadScreen();
+  void loadSounds();
   virtual void refreshDisplay(sf::RenderWindow &App) = 0;
   void reverseMove(sf::RenderWindow &App);
   void loadPosition(sf::RenderWindow &App);
@@ -70,6 +71,17 @@ class ChessBoardScreen : public cScreen
   sf::Sprite mainMenu;
   sf::Texture retry_t;
   sf::Sprite retry;
+  sf::SoundBuffer checkMateSound_buffer;
+  sf::SoundBuffer checkSound_buffer;
+  sf::SoundBuffer normalMove_buffer;
+  sf::SoundBuffer wooshSound_buffer;
+  sf::SoundBuffer captureSound_buffer;
+  sf::Sound wooshSound;
+  sf::Sound checkMateSound;
+  sf::Sound checkSound;
+  sf::Sound normalMoveSound;
+  sf::Sound captureSound;
+  bool soundNotFound = false;
   std::array<sf::Texture, 32> texture;
   std::array<sf::Sprite, 32> chesspieceSprite;
   std::vector<sf::Text> variation;

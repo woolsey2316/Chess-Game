@@ -76,7 +76,8 @@ class ChessBoard {
                       std::array<size_t,2> checkthreat,
                       std::array<size_t,2> kingIndex);
   bool canCaptureThreat(int x_pos, int y_pos,
-                        std::array<size_t,2> checkthreat);
+                        std::array<size_t,2> checkthreat,
+                        std::array<size_t,2> kingIndex);
   // king and rook has never moved, no opponent is
   // attacking a square between rook and king etc.
   bool isLegalCastle(int x_pos,int y_pos,int x_dest,int y_dest);
