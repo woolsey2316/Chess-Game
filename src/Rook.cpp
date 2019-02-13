@@ -39,7 +39,8 @@ bool Rook::isDefending(int x_pos, int y_pos, int x_dest, int y_dest, std::string
 
 std::vector<std::array<int, 2>> Rook::possibleMoves(int x_pos, int y_pos)
 {
-   for (int i = 1; i < 8; ++i) {
+  moveList.clear();
+  for (int i = 1; i < 8; ++i) {
     if (validGridCoords(x_pos, y_pos, x_pos, (y_pos + i) % 8)) {
       moveList.push_back(std::array<int, 2>{x_pos, (y_pos + i) % 8});
     }

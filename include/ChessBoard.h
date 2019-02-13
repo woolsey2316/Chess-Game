@@ -44,7 +44,7 @@ class ChessBoard {
   bool doesMoveResolveCheck(int x_pos, int y_pos,int dest_x, int dest_y,
                             std::array<size_t,2> checkThreat,
                             std::array<size_t,2> kingIndex);
-  bool isPinnedToKing(int x_pos, int y_pos, std::array<size_t,2> kingIndex);
+  bool isPinnedToKing(int x_pos, int y_pos, std::array<size_t,2> kingIndex, std::string pinned_piece_colour);
   bool breaksThePin(int x_pos, int y_pos, int x_dest, int y_dest,
                     std::array<size_t,2> kingIndex);
   //Checks all legal move requirements

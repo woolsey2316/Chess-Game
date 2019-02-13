@@ -114,8 +114,6 @@ void ChessBoard::updateBoard(int x_pos, int y_pos, int x_dest, int y_dest)
   if (x_pos == x_dest && y_pos == y_dest) {
     return;
   }
-  bool debug = board[x_pos][y_pos].isOccupied();
-
   chesspieceTouched = board[x_pos][y_pos].getChessPiece();
   capturedChesspiece = board[x_dest][y_dest].getChessPiece();
 
@@ -826,7 +824,7 @@ void ChessBoard::testForStalemate(std::string PLAYER_TURN)
                 if (x_pos == elem[0] && y_pos == elem[1]) {
                   bool debugwtf = true;
                 }
-              std::string debug3 = board[x_pos][y_pos].getChessPiece()->getColour();
+
               updateBoard(x_pos, y_pos, elem[0], elem[1]);
               //modified king position
               if (x_pos == kingIndex[0] && y_pos == kingIndex[1]) {

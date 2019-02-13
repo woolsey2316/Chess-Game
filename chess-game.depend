@@ -4563,3 +4563,369 @@
 	<thread>
 	<iostream>
 
+1550060490 source:c:\users\david\desktop\programming\c++\chess-game\src\analysisscreen.cpp
+	"AnalysisScreen.h"
+	"CheckMateScreen.h"
+	"GameScreen.h"
+	"global.h"
+	<boost/algorithm/string.hpp>
+	<sstream>
+	<chrono>
+	<thread>
+	<iostream>
+	<map>
+
+1545239266 c:\users\david\desktop\programming\c++\chess-game\include\analysisscreen.h
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	"MoveType.h"
+	"ChessBoard.h"
+	"ChessBoardScreen.h"
+	"Connector.h"
+	"Coordinates.h"
+	"ChessGame.h"
+	"main.h"
+	"cScreen.h"
+
+1537889923 c:\users\david\desktop\programming\c++\chess-game\include\movetype.h
+
+1550071736 c:\users\david\desktop\programming\c++\chess-game\include\chessboard.h
+	<string>
+	<vector>
+	<memory>
+	"ChessPiece.h"
+	"Square.h"
+	"Matrix.h"
+	"MoveType.h"
+	"CheckStatus.h"
+	<iostream>
+	"Coordinates.h"
+
+1541210353 c:\users\david\desktop\programming\c++\chess-game\include\chesspiece.h
+	<array>
+	<vector>
+	<string>
+
+1541166263 c:\users\david\desktop\programming\c++\chess-game\include\square.h
+	<vector>
+	<memory>
+	"ChessPiece.h"
+
+1529995180 c:\users\david\desktop\programming\c++\chess-game\include\matrix.h
+
+1535384889 c:\users\david\desktop\programming\c++\chess-game\include\checkstatus.h
+
+1546743424 c:\users\david\desktop\programming\c++\chess-game\include\coordinates.h
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+
+1548836029 c:\users\david\desktop\programming\c++\chess-game\include\chessboardscreen.h
+	"MoveType.h"
+	"ChessBoard.h"
+	"Connector.h"
+	"Coordinates.h"
+	"ChessGame.h"
+	"main.h"
+	"cScreen.h"
+	<map>
+
+1545201092 c:\users\david\desktop\programming\c++\chess-game\include\connector.h
+	<windows.h>
+	<stdio.h>
+	<iostream>
+	<string>
+	<Computer.h>
+	<vector>
+	<array>
+	<map>
+
+1540998409 c:\users\david\desktop\programming\c++\chess-game\include\computer.h
+	<string>
+
+1545235770 c:\users\david\desktop\programming\c++\chess-game\include\chessgame.h
+	"Player.h"
+	"ChessBoard.h"
+	"Computer.h"
+	"MoveType.h"
+	<fstream>
+	<string>
+
+1537889712 c:\users\david\desktop\programming\c++\chess-game\include\player.h
+	"MoveType.h"
+	<nlohmann/json.hpp>
+	<string>
+
+1532763936 c:\users\david\desktop\programming\c++\chess-game\include\main.h
+
+1548833626 c:\users\david\desktop\programming\c++\chess-game\include\cscreen.h
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+
+1541852982 c:\users\david\desktop\programming\c++\chess-game\include\checkmatescreen.h
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<string>
+	"global.h"
+
+1545060344 c:\users\david\desktop\programming\c++\chess-game\include\global.h
+	<string>
+
+1545239918 c:\users\david\desktop\programming\c++\chess-game\include\gamescreen.h
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	"MoveType.h"
+	"ChessBoard.h"
+	"ChessBoardScreen.h"
+	"Connector.h"
+	"Coordinates.h"
+	"ChessGame.h"
+	"main.h"
+	"cScreen.h"
+
+1550076779 source:c:\users\david\desktop\programming\c++\chess-game\src\bishop.cpp
+	"Bishop.h"
+	<cmath>
+	<tuple>
+
+1537004794 c:\users\david\desktop\programming\c++\chess-game\include\bishop.h
+	<array>
+	"ChessPiece.h"
+	<string>
+
+1548837876 source:c:\users\david\desktop\programming\c++\chess-game\src\checkmatescreen.cpp
+	"CheckMateScreen.h"
+
+1534875260 source:c:\users\david\desktop\programming\c++\chess-game\src\checkstatus.cpp
+
+1550075486 source:c:\users\david\desktop\programming\c++\chess-game\src\chessboard.cpp
+	"Pawn.h"
+	"ChessBoard.h"
+	"ChessPiece.h"
+	"King.h"
+	"Knight.h"
+	"Queen.h"
+	"Rook.h"
+	"Bishop.h"
+	"Square.h"
+	"Matrix.h"
+	"PromotionScreen.h"
+	<vector>
+	<array>
+	<string>
+	<cmath>
+	<memory>
+	<iostream>
+
+1537004761 c:\users\david\desktop\programming\c++\chess-game\include\pawn.h
+	<array>
+	<string>
+	"ChessPiece.h"
+
+1537004785 c:\users\david\desktop\programming\c++\chess-game\include\king.h
+	<array>
+	<string>
+	"ChessPiece.h"
+
+1537004775 c:\users\david\desktop\programming\c++\chess-game\include\knight.h
+	<array>
+	<string>
+	"ChessPiece.h"
+
+1537004778 c:\users\david\desktop\programming\c++\chess-game\include\queen.h
+	<array>
+	<string>
+	"ChessPiece.h"
+
+1537004779 c:\users\david\desktop\programming\c++\chess-game\include\rook.h
+	<array>
+	<string>
+	"ChessPiece.h"
+
+1536658273 c:\users\david\desktop\programming\c++\chess-game\include\promotionscreen.h
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<string>
+	"global.h"
+
+1548840270 source:c:\users\david\desktop\programming\c++\chess-game\src\chessboardscreen.cpp
+	"ChessBoardScreen.h"
+	"CheckMateScreen.h"
+	"global.h"
+	<boost/algorithm/string.hpp>
+	<sstream>
+	<chrono>
+	<thread>
+	<iostream>
+
+1545235765 source:c:\users\david\desktop\programming\c++\chess-game\src\chessgame.cpp
+	"ChessGame.h"
+	"ChessBoard.h"
+	<SFML/Graphics.hpp>
+	<time.h>
+	<string>
+	<sstream>
+	<iostream>
+	<vector>
+	<iomanip>
+	<nlohmann/json.hpp>
+
+1541210480 source:c:\users\david\desktop\programming\c++\chess-game\src\chesspiece.cpp
+	<string>
+	"ChessPiece.h"
+
+1540998465 source:c:\users\david\desktop\programming\c++\chess-game\src\computer.cpp
+	"Computer.h"
+	<string>
+	<vector>
+
+1545225651 source:c:\users\david\desktop\programming\c++\chess-game\src\connector.cpp
+	"Connector.h"
+	<string>
+	<iostream>
+	<sstream>
+	<map>
+
+1545075486 source:c:\users\david\desktop\programming\c++\chess-game\src\coordinates.cpp
+	"Coordinates.h"
+
+1535708060 source:c:\users\david\desktop\programming\c++\chess-game\src\cscreen.cpp
+	"cScreen.h"
+
+1550060508 source:c:\users\david\desktop\programming\c++\chess-game\src\drillscreen.cpp
+	"DrillScreen.h"
+	"CheckMateScreen.h"
+	"GameScreen.h"
+	"global.h"
+	<boost/algorithm/string.hpp>
+	<sstream>
+	<chrono>
+	<thread>
+	<iostream>
+
+1545239250 c:\users\david\desktop\programming\c++\chess-game\include\drillscreen.h
+	"ChessBoardScreen.h"
+	"MoveType.h"
+	"ChessBoard.h"
+	"Connector.h"
+	"Coordinates.h"
+	"ChessGame.h"
+	"main.h"
+	"cScreen.h"
+
+1548837164 source:c:\users\david\desktop\programming\c++\chess-game\src\gamescreen.cpp
+	"GameScreen.h"
+	"global.h"
+	"CheckMateScreen.h"
+	"LayoutScreen.h"
+	<boost/algorithm/string.hpp>
+	<sstream>
+	<chrono>
+	<thread>
+	<iostream>
+
+1545232650 c:\users\david\desktop\programming\c++\chess-game\include\layoutscreen.h
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<string>
+	"global.h"
+
+1545060316 source:c:\users\david\desktop\programming\c++\chess-game\src\global.cpp
+	"global.h"
+
+1550076788 source:c:\users\david\desktop\programming\c++\chess-game\src\king.cpp
+	<string>
+	"King.h"
+	"ChessPiece.h"
+	<vector>
+	<tuple>
+
+1545231545 source:c:\users\david\desktop\programming\c++\chess-game\src\knight.cpp
+	"Knight.h"
+	"ChessPiece.h"
+	<tuple>
+	<iostream>
+
+1548838381 source:c:\users\david\desktop\programming\c++\chess-game\src\layoutscreen.cpp
+	"LayoutScreen.h"
+
+1542015373 source:c:\users\david\desktop\programming\c++\chess-game\src\main.cpp
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<time.h>
+	<string>
+	<Screens.h>
+
+1541863821 c:\users\david\desktop\programming\c++\chess-game\include\screens.h
+	"cScreen.h"
+	"SettingsScreen.h"
+	"GameScreen.h"
+	"MainScreen.h"
+	"DrillScreen.h"
+	"AnalysisScreen.h"
+
+1535764405 c:\users\david\desktop\programming\c++\chess-game\include\settingsscreen.h
+	<iostream>
+	"cScreen.h"
+	<SFML/Graphics.hpp>
+
+1536757015 c:\users\david\desktop\programming\c++\chess-game\include\mainscreen.h
+	<SFML/Graphics.hpp>
+	<iostream>
+	"cScreen.h"
+
+1545217055 source:c:\users\david\desktop\programming\c++\chess-game\src\mainscreen.cpp
+	"MainScreen.h"
+
+1534881035 source:c:\users\david\desktop\programming\c++\chess-game\src\movetype.cpp
+	"MoveType.h"
+
+1550076757 source:c:\users\david\desktop\programming\c++\chess-game\src\pawn.cpp
+	"ChessPiece.h"
+	"Pawn.h"
+	<cmath>
+	<tuple>
+
+1537889881 source:c:\users\david\desktop\programming\c++\chess-game\src\player.cpp
+	"Player.h"
+	<fstream>
+	<sstream>
+	<iostream>
+	<string>
+	<vector>
+
+1548837839 source:c:\users\david\desktop\programming\c++\chess-game\src\promotionscreen.cpp
+	"PromotionScreen.h"
+
+1550076798 source:c:\users\david\desktop\programming\c++\chess-game\src\queen.cpp
+	"Queen.h"
+	"ChessPiece.h"
+
+1550076806 source:c:\users\david\desktop\programming\c++\chess-game\src\rook.cpp
+	"Rook.h"
+	"ChessPiece.h"
+	<iostream>
+
+1537890135 source:c:\users\david\desktop\programming\c++\chess-game\src\screens.cpp
+	"Screens.h"
+
+1545226651 source:c:\users\david\desktop\programming\c++\chess-game\src\settingsscreen.cpp
+	"SettingsScreen.h"
+
+1541166323 source:c:\users\david\desktop\programming\c++\chess-game\src\square.cpp
+	<vector>
+	"Square.h"
+	"ChessPiece.h"
+	"Knight.h"
+	"Queen.h"
+	"Rook.h"
+	"Bishop.h"
+

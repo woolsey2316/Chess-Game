@@ -121,9 +121,9 @@ int AnalysisScreen::Run(sf::RenderWindow &App)
           for (size_t i = 0; i < rectangle.size(); ++i) {
             if (rectangle[i].getGlobalBounds().contains(mousePosF))
             {
-              rectangle[i].setFillColor(sf::Color(170, 170, 170));
+              rectangle[i].setFillColor(sf::Color(220, 220, 220));
             } else {
-              rectangle[i].setFillColor(sf::Color(200, 200, 200));
+              rectangle[i].setFillColor(sf::Color(241, 241, 241));
             }
   	      }
           break;
@@ -178,11 +178,11 @@ void AnalysisScreen::refreshDisplay(sf::RenderWindow &App) {
   App.draw(sidePanel);
   App.draw(bottomPanel);
   App.draw(boardSprite);
+  App.draw(mainMenu);
+  App.draw(retry);
   for (size_t i = 0; i < rectangle.size(); ++i) {
       App.draw(rectangle[i]);
   }
-  App.draw(mainMenu);
-  App.draw(retry);
   for (int i = 0; i < 32; ++i) {
     App.draw(chesspieceSprite[i]);
   }

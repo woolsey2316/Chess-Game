@@ -119,9 +119,9 @@ int DrillScreen::Run(sf::RenderWindow &App)
           for (size_t i = 0; i < rectangle.size(); ++i) {
             if (rectangle[i].getGlobalBounds().contains(mousePosF))
             {
-              rectangle[i].setFillColor(sf::Color(170, 170, 170));
+              rectangle[i].setFillColor(sf::Color(220, 220, 220));
             } else {
-              rectangle[i].setFillColor(sf::Color(200, 200, 200));
+              rectangle[i].setFillColor(sf::Color(241, 241, 241));
             }
   	      }
           for (size_t i = 0; i < drillType.size(); i++) {
@@ -194,9 +194,6 @@ void DrillScreen::refreshDisplay(sf::RenderWindow &App) {
   App.draw(sidePanel);
   App.draw(bottomPanel);
   App.draw(boardSprite);
-  for (size_t i = 0; i < rectangle.size(); ++i) {
-    App.draw(rectangle[i]);
-  }
   App.draw(mainMenu);
   App.draw(retry);
   for (size_t i = 0; i < chesspieceSprite.size(); ++i) {
@@ -204,6 +201,9 @@ void DrillScreen::refreshDisplay(sf::RenderWindow &App) {
   }
   for (size_t i = 0; i < drillType.size(); ++i) {
       App.draw(drillType[i]);
+  }
+  for (size_t i = 0; i < rectangle.size(); ++i) {
+      App.draw(rectangle[i]);
   }
   App.draw(backButton);
   App.draw(forwardButton);

@@ -63,6 +63,7 @@ bool Pawn::isDefending(int x_pos, int y_pos, int x_dest, int y_dest, std::string
 
 std::vector<std::array<int, 2>> Pawn::possibleMoves(int x_pos, int y_pos)
 {
+  moveList.clear();
   if (COLOUR == "WHITE") {
     //regular and two-step move
     for (int i = 1; i <= 2; ++i) {
@@ -74,7 +75,7 @@ std::vector<std::array<int, 2>> Pawn::possibleMoves(int x_pos, int y_pos)
     if (validGridCoords(x_pos, y_pos, x_pos - 1, y_pos + 1)) {
       moveList.push_back(std::array<int, 2>{x_pos - 1, y_pos + 1});
     }
-    if (validGridCoords(x_pos, y_pos, x_pos - 1, y_pos + 1)) {
+    if (validGridCoords(x_pos, y_pos, x_pos - 1, y_pos - 1)) {
       moveList.push_back(std::array<int, 2>{x_pos - 1, y_pos - 1});
     }
   } else {
