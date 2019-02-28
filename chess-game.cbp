@@ -13,12 +13,10 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-Wall" />
-					<Add option="-std=c++11" />
 					<Add option="-g" />
-					<Add directory="C:/Libs/c++/sfml/include" />
-					<Add directory="C:/Libs/c++/boost_1_68_0" />
 					<Add directory="include" />
 					<Add directory="C:/Libs/c++" />
+					<Add directory="C:/CodeBlocks/sfml/include" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="images" />
@@ -40,6 +38,7 @@
 					<Add option="-O2" />
 					<Add directory="include" />
 					<Add directory="C:/Libs/c++" />
+					<Add directory="C:/CodeBlocks/sfml/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -51,8 +50,9 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add directory="C:/CodeBlocks/sfml/include" />
+			<Add option="-std=c++11" />
 			<Add directory="C:/Libs/c++" />
+			<Add directory="C:/Libs/c++/sfml/include" />
 		</Compiler>
 		<Linker>
 			<Add library="sfml-graphics" />
@@ -77,6 +77,7 @@
 		<Unit filename="include/DrillScreen.h" />
 		<Unit filename="include/GameScreen.h" />
 		<Unit filename="include/King.h" />
+		<Unit filename="include/KingTest.h" />
 		<Unit filename="include/Knight.h" />
 		<Unit filename="include/LayoutScreen.h" />
 		<Unit filename="include/MainScreen.h" />
@@ -106,6 +107,7 @@
 		<Unit filename="src/DrillScreen.cpp" />
 		<Unit filename="src/GameScreen.cpp" />
 		<Unit filename="src/King.cpp" />
+		<Unit filename="src/KingTest.cpp" />
 		<Unit filename="src/Knight.cpp" />
 		<Unit filename="src/LayoutScreen.cpp" />
 		<Unit filename="src/MainScreen.cpp" />
