@@ -6,8 +6,6 @@
 #include <string>
 #include <Screens.h>
 
-#include "gtest/gtest.h"
-
 int main()
 {
   std::vector<cScreen*> Screens;

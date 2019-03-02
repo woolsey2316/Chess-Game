@@ -53,7 +53,7 @@ std::vector<std::array<int, 2>> Queen::possibleMoves(int x_pos, int y_pos)
 {
   moveList.clear();
   for (int i = 1; i < 8; ++i) {
-    if (validGridCoords(x_pos, y_pos, x_pos + i, y_pos)) {
+    if (validGridCoords(x_pos, y_pos, (x_pos + i + 8) % 8, y_pos)) {
       moveList.push_back(std::array<int, 2>{(x_pos + i + 8) % 8, y_pos});
     }
   }

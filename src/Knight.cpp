@@ -38,27 +38,18 @@ bool Knight::isDefending(int x_pos, int y_pos, int x_dest, int y_dest, std::stri
 
 std::vector<std::array<int,2>> Knight::possibleMoves(int x_pos, int y_pos)
 {
-  int x_dest;
-  int x_step;
-  int y_dest;
-
-  for (int i = 0; i < 5; ++i) {
-    x_step = 2 - i;
-    if (x_step == 0) {
-      continue;
-    }
-    x_dest = x_pos + x_step;
-    y_dest = abs(x_step) == 2 ?  y_pos + 1 : y_pos + 2;
-    if (validGridCoords(x_pos, y_pos, x_dest, y_dest)) {
-      moveList.push_back(std::array<int, 2>{x_dest, y_dest});
-    }
-
-    x_dest = x_pos - x_step;
-    y_dest = abs(x_step) == 2 ?  y_pos - 1 : y_pos - 2;
-    if (validGridCoords(x_pos, y_pos, x_dest, y_dest)) {
-      moveList.push_back(std::array<int, 2>{x_dest, y_dest});
+  moveList.clear();
+  for (int xstep = 1; xstep <= 2; xstep++) {
+    for (int ystep = 1; ystep <= 2; ystep++) {
+      if (validGridCoords(x_pos, y_pos, x_pos+xstep, y_pos+ystep)) {
+        moveList.push_back(std::array<int, 2>{x_pos+xstep, y_pos+ystep});
+      }
+      if (validGridCoords(x_pos, y_pos, x_pos-xstep, y_pos-ystep)) {
+        moveList.push_back(std::array<int, 2>{x_pos-xstep, y_pos-ystep});
+      }
     }
   }
+
   return moveList;
 }
 

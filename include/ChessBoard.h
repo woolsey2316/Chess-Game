@@ -49,7 +49,7 @@ class ChessBoard {
                     std::array<size_t,2> kingIndex);
   //Checks all legal move requirements
   bool isMoveLegal(int x_pos, int y_pos, int x_dest, int y_dest,
-                   ChessPiecePtr, std::array<size_t,2> checkThreat,
+                   std::array<size_t,2> checkThreat,
                    std::array<size_t,2> kingIndex);
   //Determines if there is a chesspiece between
   //source and destination of moving chesspiece
@@ -71,13 +71,8 @@ class ChessBoard {
   // between or captures the threat to the king
   bool canBlockorCaptureThreat(int x_pos, int y_pos, int destx, int desty,
                                 std::array<size_t,2> checkthreat,
-                                std::array<size_t,2> kingIndex);
-  bool canBlockThreat(int x_pos, int y_pos,
-                      std::array<size_t,2> checkthreat,
-                      std::array<size_t,2> kingIndex);
-  bool canCaptureThreat(int x_pos, int y_pos,
-                        std::array<size_t,2> checkthreat,
-                        std::array<size_t,2> kingIndex);
+                                std::array<size_t,2> kingIndex,
+                                bool alreadyMoved);
   // king and rook has never moved, no opponent is
   // attacking a square between rook and king etc.
   bool isLegalCastle(int x_pos,int y_pos,int x_dest,int y_dest);
@@ -99,11 +94,21 @@ class ChessBoard {
   std::string getColour(int x, int y);
   bool isOccupied(int x_pos, int y_pos);
   void testForStalemate(std::string PLAYER_TURN);
-  //was the most recent move a two step enPassant
+  //was the most recent move a two step pawn move
   void setEnPassant(bool pawnMoves2Squares);
-  //unwinds invalid move
   void reverseMove(int x_pos,int y_pos,int x_dest,int y_dest);
   void updateBoard(int x_pos,int y_pos,int x_dest,int y_dest);
+  bool isBetween(int pos1, int mid, int pos2);
+  std::string getChessPieceType(int x_pos,int y_pos);
+  std::string getChessPieceColour(int x_pos,int y_pos);
+  bool isValidCapture(int x_pos,int y_pos,int x_dest,int y_dest,
+                      std::string COLOUR,bool alreadyMoved);
+  bool isValidMove(int x_pos,int y_pos,int x_dest,int y_dest,bool alreadyMoved);
+  bool isDefending(int x_pos,int y_pos,int x_pinned,int y_pinned,
+                   std::string pinned_piece_colour);
+  std::vector<std::array<int, 2>> findPossibleMoves(int x_pos,int y_pos);
+  bool isValidEnPassant(int x_pos,int y_pos,int x_dest,int y_dest,
+                        std::string pieceType,int* mostRecentMove);
 };
 
 #endif

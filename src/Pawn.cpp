@@ -42,12 +42,12 @@ bool Pawn::isValidCapture(int x_pos, int y_pos, int x_dest, int y_dest, std::str
                 &(abs(y_dest-y_pos) == 1) & (x_dest-x_pos == 1)));
 }
 
-bool Pawn::isValidEnPassant(int start_x, int start_y, int dest_x, int dest_y, std::string pieceType, int* recentMove)
+bool Pawn::isValidEnPassant(int start_x, int start_y, int dest_x, int dest_y,std::string pieceType, int* recentMove)
 {
   return (recentMove[0] == start_x) & (recentMove[1] == dest_y)
       & (pieceType == "PAWN") &((start_x-dest_x)*(start_x-dest_x)
       + (dest_y-start_y)*(dest_y-start_y) == 2)
-      //white enPassant
+      //White enPassant
       & ((COLOUR == "WHITE") &((abs(dest_y-start_y) == 1)||(dest_y-start_y == 0))
       & (start_x == 3) & (dest_x-start_x == -1)
       //Black enPassant
@@ -66,30 +66,24 @@ std::vector<std::array<int, 2>> Pawn::possibleMoves(int x_pos, int y_pos)
   moveList.clear();
   if (COLOUR == "WHITE") {
     //regular and two-step move
-    for (int i = 1; i <= 2; ++i) {
-      if (validGridCoords(x_pos, y_pos, x_pos - i, y_pos)) {
-        moveList.push_back(std::array<int, 2>{x_pos - i, y_pos});
+    for (int i = -1; i <= 1; ++i) {
+      if (validGridCoords(x_pos, y_pos, x_pos - 1, y_pos+i)) {
+        moveList.push_back(std::array<int, 2>{x_pos - 1, y_pos+i});
       }
     }
-    //enPassant
-    if (validGridCoords(x_pos, y_pos, x_pos - 1, y_pos + 1)) {
-      moveList.push_back(std::array<int, 2>{x_pos - 1, y_pos + 1});
-    }
-    if (validGridCoords(x_pos, y_pos, x_pos - 1, y_pos - 1)) {
-      moveList.push_back(std::array<int, 2>{x_pos - 1, y_pos - 1});
+    //two step move
+    if (validGridCoords(x_pos, y_pos, x_pos - 2, y_pos)) {
+        moveList.push_back(std::array<int, 2>{x_pos - 2, y_pos});
     }
   } else {
-    for (int i = 1; i <= 2; ++i) {
-      if (validGridCoords(x_pos, y_pos, x_pos + i, y_pos)) {
-        moveList.push_back(std::array<int, 2>{x_pos + i, y_pos});
+    for (int i = -1; i <= 1; ++i) {
+      if (validGridCoords(x_pos, y_pos, x_pos + 1, y_pos+i)) {
+        moveList.push_back(std::array<int, 2>{x_pos + 1, y_pos+i});
       }
     }
-    //enPassant
-    if (validGridCoords(x_pos, y_pos, x_pos + 1, y_pos + 1)) {
-      moveList.push_back(std::array<int, 2>{x_pos + 1, y_pos + 1});
-    }
-    if (validGridCoords(x_pos, y_pos, x_pos + 1, y_pos - 1)) {
-      moveList.push_back(std::array<int, 2>{x_pos + 1, y_pos - 1});
+    //two step move
+    if (validGridCoords(x_pos, y_pos, x_pos + 2, y_pos)) {
+        moveList.push_back(std::array<int, 2>{x_pos + 2, y_pos});
     }
   }
   return moveList;
