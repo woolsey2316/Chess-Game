@@ -9,6 +9,8 @@
 #include <thread>
 #include <iostream>
 #include <map>
+#include <chrono>
+#include <windows.h>
 
 AnalysisScreen::AnalysisScreen()
 {
@@ -170,6 +172,14 @@ int AnalysisScreen::Run(sf::RenderWindow &App)
     }
   }
   return -1;
+}
+
+void AnalysisScreen::timer() {
+  while (true) {
+    Sleep(200);
+    getPositionScores();
+  }
+
 }
 
 void AnalysisScreen::refreshDisplay(sf::RenderWindow &App) {

@@ -20,6 +20,8 @@ int main()
   DrillScreen s3;
   Screens.push_back(&s3);
   AnalysisScreen s4;
+  sf::Thread thread(&AnalysisScreen::timer, &s4);
+  thread.launch();
   Screens.push_back(&s4);
 	while (screen >= 0)
 	{

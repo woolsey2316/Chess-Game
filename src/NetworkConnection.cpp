@@ -10,8 +10,6 @@ NetworkConnection::~NetworkConnection()
   //dtor
 }
 
-
-
 void sendMove(void)
 {
 	static std::string oldMsg;
@@ -69,7 +67,7 @@ int main(int argc, char* argv[])
 {
 	sf::Thread* thread = 0;
 
-  Client();
+	Client();
 
 	thread = new sf::Thread(&sendMove);
 	thread->launch();

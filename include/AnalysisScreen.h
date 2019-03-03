@@ -22,6 +22,7 @@ class AnalysisScreen : public ChessBoardScreen {
 	int Run(sf::RenderWindow &App);
   void refreshDisplay(sf::RenderWindow &App);
   void loadScreen();
+  void timer();
 
  private:
   sf::Texture sidePanel_t;

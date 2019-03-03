@@ -4563,7 +4563,7 @@
 	<thread>
 	<iostream>
 
-1550060490 source:c:\users\david\desktop\programming\c++\chess-game\src\analysisscreen.cpp
+1551595037 source:c:\users\david\desktop\programming\c++\chess-game\src\analysisscreen.cpp
 	"AnalysisScreen.h"
 	"CheckMateScreen.h"
 	"GameScreen.h"
@@ -4574,8 +4574,10 @@
 	<thread>
 	<iostream>
 	<map>
+	<chrono>
+	<windows.h>
 
-1545239266 c:\users\david\desktop\programming\c++\chess-game\include\analysisscreen.h
+1551595195 c:\users\david\desktop\programming\c++\chess-game\include\analysisscreen.h
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
@@ -4785,7 +4787,7 @@
 	<string>
 	<vector>
 
-1545225651 source:c:\users\david\desktop\programming\c++\chess-game\src\connector.cpp
+1551593265 source:c:\users\david\desktop\programming\c++\chess-game\src\connector.cpp
 	"Connector.h"
 	<string>
 	<iostream>
@@ -4856,7 +4858,7 @@
 1548838381 source:c:\users\david\desktop\programming\c++\chess-game\src\layoutscreen.cpp
 	"LayoutScreen.h"
 
-1551522081 source:c:\users\david\desktop\programming\c++\chess-game\src\main.cpp
+1551595196 source:c:\users\david\desktop\programming\c++\chess-game\src\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
