@@ -4,6 +4,7 @@ LayoutScreen::LayoutScreen(std::string fileName_)
 {
   fileName = fileName_;
   sf::RenderWindow window(sf::VideoMode(854, 444), "Set Layout");
+  window.setFramerateLimit(60);
   background.setFillColor(sf::Color(255,255,255));
   background.setSize(sf::Vector2f(854, 444));
 

@@ -130,7 +130,7 @@ void ChessBoardScreen::loadChessSprites()
   boardSprite.setTexture(gameBoard_t);
   boardSprite.setPosition(g_pixel_dx, g_pixel_dy);
 
-  background_t.loadFromFile("images/wood-background.jpg");
+  background_t.loadFromFile("images/white-marble.jpg");
   background.setTexture(background_t);
 
   mainMenu_t.loadFromFile("images/main_menu.png");
@@ -385,8 +385,8 @@ void ChessBoardScreen::reverseMove(sf::RenderWindow &App)
       }
       move(oldCoordinates, newCoordinates, moveType, touchedByComputer);
       chessgame.nextTurn();
-      refreshDisplay(App);
     }
+    refreshDisplay(App);
   }
 }
 

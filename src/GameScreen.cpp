@@ -2,6 +2,7 @@
 #include "global.h"
 #include "CheckMateScreen.h"
 #include "LayoutScreen.h"
+#include "OptionMenu.h"
 
 #include <boost/algorithm/string.hpp>
 #include <sstream>
@@ -129,6 +130,12 @@ int GameScreen::Run(sf::RenderWindow &App)
               setChessBoardFile(layoutScreen.getChosenImageFile());
               buttonPressed = true;
             }
+            if (computerDifficulty.getGlobalBounds().contains(mousePosF)) {
+              OptionMenu optionMenu(chessgame.getComputer().getDifficulty());
+              int difficulty = optionMenu.getChosenDifficulty();
+              chessgame.getComputer().setDifficulty(difficulty);
+              computerDifficulty.setString("Computer Level " + std::to_string(difficulty));
+            }
             if (mainMenu.getGlobalBounds().contains(mousePosF))
             {
               return 0;
@@ -178,9 +185,10 @@ void GameScreen::refreshDisplay(sf::RenderWindow &App) {
   }
   App.draw(mainMenu);
   App.draw(retry);
-  for (size_t i = 0; i < 32; ++i) {
+  for (size_t i = 0; i < chesspieceSprite.size(); ++i) {
       App.draw(chesspieceSprite[i]);
   }
+  App.draw(computerDifficulty);
   App.display();
 }
 
@@ -193,6 +201,18 @@ void GameScreen::loadScreen()
   settings_t.loadFromFile("images/settings.png");
   settings.setTexture(settings_t);
   settings.setPosition({605, g_pixel_dy + 5});
+
+  if (!Font.loadFromFile("images/verdanab.ttf"))
+	{
+		std::cerr << "Error loading verdanab.ttf" << std::endl;
+	}
+
+  computerDifficulty.setFont(Font);
+  computerDifficulty.setString("Computer Level " + std::to_string(chessgame.getComputer().getDifficulty()));
+  computerDifficulty.setCharacterSize(18);
+  computerDifficulty.setPosition({700, g_pixel_dy + 50});
+  computerDifficulty.setFillColor(sf::Color::Blue);
+  computerDifficulty.getLocalBounds();
 
   loadChessSprites();
   loadSounds();

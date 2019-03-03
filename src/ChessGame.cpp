@@ -92,7 +92,7 @@ void ChessGame::reverseMove()
 {
   if (!moveList.empty()) {
     moveList.pop_back();
-    if (entireMoveHistory.length() > 12) {
+    if (entireMoveHistory.length() > 5) {
       entireMoveHistory.erase(entireMoveHistory.length()-5,5);
     } else {
       entireMoveHistory = "";

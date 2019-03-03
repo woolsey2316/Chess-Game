@@ -26,6 +26,7 @@ class GameScreen : public ChessBoardScreen {
  private:
   sf::Texture sidePanel_t;
   sf::Sprite sidePanel;
+  sf::Text computerDifficulty;
 
 };
 

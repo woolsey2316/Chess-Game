@@ -4563,7 +4563,7 @@
 	<thread>
 	<iostream>
 
-1551595037 source:c:\users\david\desktop\programming\c++\chess-game\src\analysisscreen.cpp
+1551605688 source:c:\users\david\desktop\programming\c++\chess-game\src\analysisscreen.cpp
 	"AnalysisScreen.h"
 	"CheckMateScreen.h"
 	"GameScreen.h"
@@ -4646,7 +4646,7 @@
 1540998409 c:\users\david\desktop\programming\c++\chess-game\include\computer.h
 	<string>
 
-1545235770 c:\users\david\desktop\programming\c++\chess-game\include\chessgame.h
+1551596823 c:\users\david\desktop\programming\c++\chess-game\include\chessgame.h
 	"Player.h"
 	"ChessBoard.h"
 	"Computer.h"
@@ -4677,7 +4677,7 @@
 1545060344 c:\users\david\desktop\programming\c++\chess-game\include\global.h
 	<string>
 
-1545239918 c:\users\david\desktop\programming\c++\chess-game\include\gamescreen.h
+1551601530 c:\users\david\desktop\programming\c++\chess-game\include\gamescreen.h
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
@@ -4756,7 +4756,7 @@
 	<string>
 	"global.h"
 
-1548840270 source:c:\users\david\desktop\programming\c++\chess-game\src\chessboardscreen.cpp
+1551602065 source:c:\users\david\desktop\programming\c++\chess-game\src\chessboardscreen.cpp
 	"ChessBoardScreen.h"
 	"CheckMateScreen.h"
 	"global.h"
@@ -4766,7 +4766,7 @@
 	<thread>
 	<iostream>
 
-1545235765 source:c:\users\david\desktop\programming\c++\chess-game\src\chessgame.cpp
+1551596999 source:c:\users\david\desktop\programming\c++\chess-game\src\chessgame.cpp
 	"ChessGame.h"
 	"ChessBoard.h"
 	<SFML/Graphics.hpp>
@@ -4787,7 +4787,7 @@
 	<string>
 	<vector>
 
-1551593265 source:c:\users\david\desktop\programming\c++\chess-game\src\connector.cpp
+1551596167 source:c:\users\david\desktop\programming\c++\chess-game\src\connector.cpp
 	"Connector.h"
 	<string>
 	<iostream>
@@ -4800,7 +4800,7 @@
 1535708060 source:c:\users\david\desktop\programming\c++\chess-game\src\cscreen.cpp
 	"cScreen.h"
 
-1550060508 source:c:\users\david\desktop\programming\c++\chess-game\src\drillscreen.cpp
+1551605728 source:c:\users\david\desktop\programming\c++\chess-game\src\drillscreen.cpp
 	"DrillScreen.h"
 	"CheckMateScreen.h"
 	"GameScreen.h"
@@ -4821,11 +4821,12 @@
 	"main.h"
 	"cScreen.h"
 
-1548837164 source:c:\users\david\desktop\programming\c++\chess-game\src\gamescreen.cpp
+1551606865 source:c:\users\david\desktop\programming\c++\chess-game\src\gamescreen.cpp
 	"GameScreen.h"
 	"global.h"
 	"CheckMateScreen.h"
 	"LayoutScreen.h"
+	"OptionMenu.h"
 	<boost/algorithm/string.hpp>
 	<sstream>
 	<chrono>
@@ -4855,7 +4856,7 @@
 	<tuple>
 	<iostream>
 
-1548838381 source:c:\users\david\desktop\programming\c++\chess-game\src\layoutscreen.cpp
+1551599089 source:c:\users\david\desktop\programming\c++\chess-game\src\layoutscreen.cpp
 	"LayoutScreen.h"
 
 1551595196 source:c:\users\david\desktop\programming\c++\chess-game\src\main.cpp
@@ -5100,4 +5101,15 @@
 
 1551168310 c:\github\googletest\googletest\include\gtest\gtest_pred_impl.h
 	"gtest/gtest.h"
+
+1551608305 source:c:\users\david\desktop\programming\c++\chess-game\src\optionmenu.cpp
+	"OptionMenu.h"
+	<string>
+
+1551607307 c:\users\david\desktop\programming\c++\chess-game\include\optionmenu.h
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<string>
+	"global.h"
 
