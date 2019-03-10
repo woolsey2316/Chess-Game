@@ -124,6 +124,10 @@ int GameScreen::Run(sf::RenderWindow &App)
           break;
   	    }
   	    case sf::Event::MouseButtonPressed : {
+          if (isPressed) {
+            chesspieceSprite[touchedByPlayer].setPosition(oldPos.x,oldPos.y);
+            isPressed = false;
+  	      }
           if (e.key.code == sf::Mouse::Left) {
             if (settings.getGlobalBounds().contains(mousePosF)) {
               LayoutScreen layoutScreen(chessBoardFile);
